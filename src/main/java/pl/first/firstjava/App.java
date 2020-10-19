@@ -2,6 +2,7 @@ package pl.first.firstjava;
 
 /**
  * Klasa główna z metodą main.
+ *
  * @author Marcin Kwapisz
  */
 public class App {
@@ -11,3 +12,4 @@ public class App {
         System.out.println(greeter.greet(args[0]));
     }
 }
+//bylem tuuu
