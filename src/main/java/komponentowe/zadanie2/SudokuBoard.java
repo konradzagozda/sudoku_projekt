@@ -1,7 +1,9 @@
 package komponentowe.zadanie2;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class SudokuBoard {
 
@@ -12,24 +14,26 @@ public class SudokuBoard {
     }
 
     public void fillBoard() {
-        //todo: backtracking method
+        //todo
+    }
 
-        Random rand = new Random();
-        for (int i = 0; i <= 8; i++) {
-            for (int j = 0; j <= 8; j++) {
-                sudokuBoard[i][j] = rand.nextInt(9) + 1;
-            }
+    public int get(int rowIndex, int columnIndex){ //
+        if ( columnIndex < 9 && rowIndex < 9){
+            return sudokuBoard[rowIndex][columnIndex];
+        } else {
+            return 0;
         }
     }
 
-    public void showBoard() {
-        System.out.println(Arrays.deepToString(sudokuBoard));
-    }
-
-    //getters
-
-    public int[][] getSudokuBoard() {
-        return sudokuBoard;
+    private static class fillBoardUtils {
+        static boolean isFull(int[][] sudokuBoard) {
+            for (int row = 0; row < 9; row++) {
+                for (int column = 0; column < 9; column++) {
+                    if (sudokuBoard[row][column] == 0) return false;
+                }
+            }
+            return true;
+        }
     }
 
 }

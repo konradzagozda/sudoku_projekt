@@ -16,7 +16,12 @@ public class SudokuBoardTest {
     void setupBoard() {
         testBoard = new SudokuBoard();
         testBoard.fillBoard();
-        rows = testBoard.getSudokuBoard();
+        rows = new int[9][9];
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                rows[row][column] = testBoard.get(row,column);
+            }
+        }
     }
 
     @Test
