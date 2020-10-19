@@ -12,18 +12,17 @@ public class SudokuBoard {
     }
 
     public void fillBoard() {
-        System.out.println("Backtracking");
+        //todo: backtracking method
 
         Random rand = new Random();
         for (int i = 0; i <= 8; i++) {
             for (int j = 0; j <= 8; j++) {
-                sudokuBoard[i][j] = (int) rand.nextInt(9) + 1;
+                sudokuBoard[i][j] = rand.nextInt(9) + 1;
             }
         }
     }
 
     public void showBoard() {
-        System.out.println("Showing board...");
         System.out.println(Arrays.deepToString(sudokuBoard));
     }
 
