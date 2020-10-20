@@ -11,18 +11,30 @@ public class SudokuBoard {
         sudokuBoard = new int[9][9];
     }
 
-    public void fillBoard(int[][] sudokuBoard) {
+    public static void main(String ...args) {
+        SudokuBoard sudoku = new SudokuBoard();
+        sudoku.fillBoard();
+        sudoku.printBoard();
+    }
+
+    public void fillBoard() {
+        fillRecursively(sudokuBoard);
+    }
+
+    private boolean fillRecursively(int[][] sudokuBoard) {
         // find next empty cell:
+        int rowIndex = 0;
+        int columnIndex = 0;
         for (int i = 0; i < 81; i++) {
-            int rowIndex = i / 9;
-            int columnIndex = i % 9;
+            rowIndex = i / 9;
+            columnIndex = i % 9;
             if (sudokuBoard[rowIndex][columnIndex] == 0) {
                 // make it random:
-                List<Integer> values = Arrays.asList(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
+                List<Integer> values = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
                 Collections.shuffle(values);
                 for (Integer value : values) {
                     // check that value has not been used in a row:
-                    if ( IntStream.of(sudokuBoard[rowIndex]).anyMatch(x -> x == value)) {
+                    if (IntStream.of(sudokuBoard[rowIndex]).noneMatch(x -> x == value)) {
                         int[] column = new int[]{
                                 sudokuBoard[0][columnIndex],
                                 sudokuBoard[1][columnIndex],
@@ -35,15 +47,101 @@ public class SudokuBoard {
                                 sudokuBoard[8][columnIndex]
                         };
                         // check that value has not been used in a column:
-                        if ( IntStream.of(column).anyMatch(x -> x == value)) {
+                        if (IntStream.of(column).noneMatch(x -> x == value)) {
                             // find out which square we are in:
-                            int[] square = new int[9];
-                            // todo:
+                            int[][] square = new int[3][3];
+                            if (rowIndex < 3) {
+                                if (columnIndex < 3) {
+                                    for (int j = 0; j < 3; j++) {
+                                        for (int k = 0; k < 3; k++) {
+                                            square[j][k] = get(j, k);
+                                        }
+                                    }
+                                } else if (columnIndex < 6) {
+                                    for (int j = 0; j < 3; j++) {
+                                        for (int k = 3; k < 6; k++) {
+                                            square[j][k % 3] = get(j, k);
+                                        }
+                                    }
+                                } else { // columnIndex [6..8]
+                                    for (int j = 0; j < 3; j++) {
+                                        for (int k = 6; k < 9; k++) {
+                                            square[j][k % 3] = get(j, k);
+                                        }
+                                    }
+                                }
+                            } else if (rowIndex < 6) {
+                                if (columnIndex < 3) {
+                                    for (int j = 3; j < 6; j++) {
+                                        for (int k = 0; k < 3; k++) {
+                                            square[j % 3][k] = get(j, k);
+                                        }
+                                    }
+                                } else if (columnIndex < 6) {
+                                    for (int j = 3; j < 6; j++) {
+                                        for (int k = 3; k < 6; k++) {
+                                            square[j % 3][k % 3] = get(j, k);
+                                        }
+                                    }
+                                } else { // columnIndex [6..8]
+                                    for (int j = 3; j < 6; j++) {
+                                        for (int k = 6; k < 9; k++) {
+                                            square[j % 3][k % 3] = get(j, k);
+                                        }
+                                    }
+                                }
+                            } else { // rowIndex [6..8]
+                                if (columnIndex < 3) {
+                                    for (int j = 6; j < 9; j++) {
+                                        for (int k = 0; k < 3; k++) {
+                                            square[j % 3][k] = get(j, k);
+                                        }
+                                    }
+                                } else if (columnIndex < 6) {
+                                    for (int j = 6; j < 9; j++) {
+                                        for (int k = 3; k < 6; k++) {
+                                            square[j % 3][k % 3] = get(j, k);
+                                        }
+                                    }
+                                } else { // columnIndex [6..8]
+                                    for (int j = 6; j < 9; j++) {
+                                        for (int k = 6; k < 9; k++) {
+                                            square[j % 3][k % 3] = get(j, k);
+                                        }
+                                    }
+                                }
+                            }
+                            // check that value has not been used in a square:
+                            if ((IntStream.of(square[0]).noneMatch(x -> x == value)
+                                    && IntStream.of(square[1]).noneMatch(x -> x == value)
+                                    && IntStream.of(square[2]).noneMatch(x -> x == value))) {
+                                // now we can try the number...
+                                sudokuBoard[rowIndex][columnIndex] = value;
+                                // magic is happening here:
+                                if (isFull(sudokuBoard)) {
+                                    return true;
+                                } else {
+                                    if (fillRecursively(sudokuBoard)) {
+                                        return true;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+                break;
             }
         }
+        sudokuBoard[rowIndex][columnIndex] = 0;
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuBoard that = (SudokuBoard) o;
+        return Arrays.deepEquals(sudokuBoard, that.sudokuBoard);
     }
 
     public int get(int rowIndex, int columnIndex) { //
@@ -61,6 +159,13 @@ public class SudokuBoard {
             }
         }
         return true;
+    }
+
+    public void printBoard() {
+        for (int[] row : sudokuBoard
+        ) {
+            System.out.println(Arrays.toString(row));
+        }
     }
 
 }

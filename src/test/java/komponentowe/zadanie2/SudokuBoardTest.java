@@ -4,13 +4,13 @@ import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuBoardTest {
 
     SudokuBoard testBoard;
     int[][] rows;
+
 
     @BeforeEach
     void setupBoard() {
@@ -19,12 +19,13 @@ public class SudokuBoardTest {
         rows = new int[9][9];
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
-                rows[row][column] = testBoard.get(row,column);
+                rows[row][column] = testBoard.get(row, column);
             }
         }
     }
 
-    @Test
+
+    @RepeatedTest(10)
     void fillBoardTest() {
         // test if rows have correct sum:
         for (int i = 0; i < 9; i++) {
@@ -51,59 +52,81 @@ public class SudokuBoardTest {
             for (int j = 0; j < 3; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
+        }
+
+        sum = 0;
+        for (int i = 0; i < 3; i++) {
+
             // second block
             for (int j = 3; j < 6; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
+        }
+        assertEquals(45, sum);
+        sum = 0;
+        for (int i = 0; i < 3; i++) {
+
             // third block
             for (int j = 6; j < 9; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
         }
+        assertEquals(45, sum);
         // rows at indices 3,4,5
+        sum = 0;
         for (int i = 3; i < 6; i++) {
             for (int j = 0; j < 3; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
+        }
+        assertEquals(45, sum);
+        sum = 0;
+        for (int i = 3; i < 6; i++) {
             for (int j = 3; j < 6; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
+        }
+        assertEquals(45, sum);
+        sum = 0;
+        for (int i = 3; i < 6; i++) {
             for (int j = 6; j < 9; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
         }
-
+        assertEquals(45, sum);
         // rows at indices 6,7,8
+        sum = 0;
         for (int i = 6; i < 9; i++) {
             for (int j = 0; j < 3; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
+        }
+        assertEquals(45, sum);
+        sum = 0;
+        for (int i = 6; i < 9; i++) {
             for (int j = 3; j < 6; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
+        }
+        assertEquals(45, sum);
+        sum = 0;
+        for (int i = 6; i < 9; i++) {
             for (int j = 6; j < 9; j++) {
                 sum += rows[i][j];
             }
-            assertEquals(45, sum);
-            sum = 0;
         }
+        assertEquals(45, sum);
+
+    }
+
+    @RepeatedTest(10)
+    void fillBoardUniqueSudokusTest() {
+        SudokuBoard testBoard2 = new SudokuBoard();
+        testBoard2.fillBoard();
+
+        assertNotEquals(testBoard, testBoard2);
     }
 }
+
 
 
