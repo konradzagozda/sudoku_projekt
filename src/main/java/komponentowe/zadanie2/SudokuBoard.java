@@ -1,6 +1,8 @@
 package komponentowe.zadanie2;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class SudokuBoard {
@@ -132,8 +134,12 @@ public class SudokuBoard {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SudokuBoard that = (SudokuBoard) o;
         return Arrays.deepEquals(sudokuBoard, that.sudokuBoard);
     }
@@ -150,7 +156,9 @@ public class SudokuBoard {
     private boolean isFull(int[][] sudokuBoard) {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
-                if (sudokuBoard[row][column] == 0) return false;
+                if (sudokuBoard[row][column] == 0) {
+                    return false;
+                }
             }
         }
         return true;
