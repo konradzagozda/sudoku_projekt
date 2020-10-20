@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 public class SudokuBoard {
 
-    private int[][] sudokuBoard;
+    private final int[][] sudokuBoard;
 
     public SudokuBoard() {
         sudokuBoard = new int[9][9];

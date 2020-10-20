@@ -120,7 +120,7 @@ public class SudokuBoardTest {
     }
 
     @RepeatedTest(10)
-    void fillBoardUniqueSudokusTest() {
+    void fillBoardUniqueSudokuTest() {
         SudokuBoard testBoard2 = new SudokuBoard();
         testBoard2.fillBoard();
 
