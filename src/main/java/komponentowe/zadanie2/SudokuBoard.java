@@ -11,12 +11,6 @@ public class SudokuBoard {
         sudokuBoard = new int[9][9];
     }
 
-    public static void main(String ...args) {
-        SudokuBoard sudoku = new SudokuBoard();
-        sudoku.fillBoard();
-        sudoku.printBoard();
-    }
-
     public void fillBoard() {
         fillRecursively(sudokuBoard);
     }
@@ -144,7 +138,8 @@ public class SudokuBoard {
         return Arrays.deepEquals(sudokuBoard, that.sudokuBoard);
     }
 
-    public int get(int rowIndex, int columnIndex) { //
+
+    public int get(int rowIndex, int columnIndex) {
         if (columnIndex < 9 && rowIndex < 9) {
             return sudokuBoard[rowIndex][columnIndex];
         } else {
