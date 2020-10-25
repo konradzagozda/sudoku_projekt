@@ -11,7 +11,6 @@ public class SudokuBoardTest {
     SudokuBoard testBoard;
     int[][] rows;
 
-
     @BeforeEach
     void setupBoard() {
         testBoard = new SudokuBoard();
@@ -23,7 +22,6 @@ public class SudokuBoardTest {
             }
         }
     }
-
 
     @RepeatedTest(10)
     void fillBoardTest() {

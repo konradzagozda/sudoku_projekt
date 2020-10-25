@@ -112,7 +112,7 @@ public class SudokuBoard {
                                     && IntStream.of(square[1]).noneMatch(x -> x == value)
                                     && IntStream.of(square[2]).noneMatch(x -> x == value))) {
                                 // now we can try the number...
-                                sudokuBoard[rowIndex][columnIndex] = value;
+                                setField(rowIndex, columnIndex, value);
                                 // magic is happening here:
                                 if (isFull(sudokuBoard)) {
                                     return true;
@@ -128,7 +128,7 @@ public class SudokuBoard {
                 break;
             }
         }
-        sudokuBoard[rowIndex][columnIndex] = 0;
+        setField(rowIndex, columnIndex, 0);
         return false;
     }
 
@@ -144,6 +144,9 @@ public class SudokuBoard {
         return Arrays.deepEquals(sudokuBoard, that.sudokuBoard);
     }
 
+    public void setField(int x, int y, int value) {
+        sudokuBoard[x][y] = value;
+    }
 
     public int get(int rowIndex, int columnIndex) {
         if (columnIndex < 9 && rowIndex < 9) {
@@ -170,5 +173,4 @@ public class SudokuBoard {
             System.out.println(Arrays.toString(row));
         }
     }
-
 }
