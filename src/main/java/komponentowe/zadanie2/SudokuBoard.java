@@ -13,6 +13,11 @@ public class SudokuBoard {
         board = new int[9][9];
     }
 
+    public void solveGame() {
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        solver.solve(this);
+    }
+
     public void set(int x, int y, int value) {
         board[x][y] = value;
     }

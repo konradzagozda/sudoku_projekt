@@ -25,39 +25,29 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                 Collections.shuffle(values);
                 for (Integer value : values) {
                     // check that value has not been used in a row:
-                    if (IntStream.of(board[rowIndex]).noneMatch(x -> x == value)) {
-                        int[] column = new int[]{
-                                board[0][columnIndex],
-                                board[1][columnIndex],
-                                board[2][columnIndex],
-                                board[3][columnIndex],
-                                board[4][columnIndex],
-                                board[5][columnIndex],
-                                board[6][columnIndex],
-                                board[7][columnIndex],
-                                board[8][columnIndex]
-                        };
+                    if (checkInRow(value, rowIndex, board)) {
                         // check that value has not been used in a column:
-                        if (IntStream.of(column).noneMatch(x -> x == value)) {
+                        if (checkInColumn(value, columnIndex, board)) {
                             // find out which square we are in:
                             int[][] square = new int[3][3];
+
                             if (rowIndex < 3) {
                                 if (columnIndex < 3) {
                                     for (int j = 0; j < 3; j++) {
                                         for (int k = 0; k < 3; k++) {
-                                            square[j][k] = get(j, k);
+                                            square[j][k] = board.get(j, k);
                                         }
                                     }
                                 } else if (columnIndex < 6) {
                                     for (int j = 0; j < 3; j++) {
                                         for (int k = 3; k < 6; k++) {
-                                            square[j][k % 3] = get(j, k);
+                                            square[j][k % 3] = board.get(j, k);
                                         }
                                     }
                                 } else { // columnIndex [6..8]
                                     for (int j = 0; j < 3; j++) {
                                         for (int k = 6; k < 9; k++) {
-                                            square[j][k % 3] = get(j, k);
+                                            square[j][k % 3] = board.get(j, k);
                                         }
                                     }
                                 }
@@ -65,19 +55,19 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                                 if (columnIndex < 3) {
                                     for (int j = 3; j < 6; j++) {
                                         for (int k = 0; k < 3; k++) {
-                                            square[j % 3][k] = get(j, k);
+                                            square[j % 3][k] = board.get(j, k);
                                         }
                                     }
                                 } else if (columnIndex < 6) {
                                     for (int j = 3; j < 6; j++) {
                                         for (int k = 3; k < 6; k++) {
-                                            square[j % 3][k % 3] = get(j, k);
+                                            square[j % 3][k % 3] = board.get(j, k);
                                         }
                                     }
                                 } else { // columnIndex [6..8]
                                     for (int j = 3; j < 6; j++) {
                                         for (int k = 6; k < 9; k++) {
-                                            square[j % 3][k % 3] = get(j, k);
+                                            square[j % 3][k % 3] = board.get(j, k);
                                         }
                                     }
                                 }
@@ -85,19 +75,19 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                                 if (columnIndex < 3) {
                                     for (int j = 6; j < 9; j++) {
                                         for (int k = 0; k < 3; k++) {
-                                            square[j % 3][k] = get(j, k);
+                                            square[j % 3][k] = board.get(j, k);
                                         }
                                     }
                                 } else if (columnIndex < 6) {
                                     for (int j = 6; j < 9; j++) {
                                         for (int k = 3; k < 6; k++) {
-                                            square[j % 3][k % 3] = get(j, k);
+                                            square[j % 3][k % 3] = board.get(j, k);
                                         }
                                     }
                                 } else { // columnIndex [6..8]
                                     for (int j = 6; j < 9; j++) {
                                         for (int k = 6; k < 9; k++) {
-                                            square[j % 3][k % 3] = get(j, k);
+                                            square[j % 3][k % 3] = board.get(j, k);
                                         }
                                     }
                                 }
@@ -107,7 +97,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                                     && IntStream.of(square[1]).noneMatch(x -> x == value)
                                     && IntStream.of(square[2]).noneMatch(x -> x == value))) {
                                 // now we can try the number...
-                                set(rowIndex, columnIndex, value);
+                                board.set(rowIndex, columnIndex, value);
                                 // magic is happening here:
                                 if (isFull(board)) {
                                     return true;
@@ -123,14 +113,53 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                 break;
             }
         }
-        set(rowIndex, columnIndex, 0);
+        board.set(rowIndex, columnIndex, 0);
         return false;
     }
 
-    private boolean isFull(int[][] board) {
+    private boolean checkInRow(int value, int rowIndex, SudokuBoard board){
+        for (int i = 0; i < 9; i++) {
+            if (value == board.get(rowIndex, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkInColumn(int value, int columnIndex, SudokuBoard board){
+        for (int i = 0; i < 9; i++) {
+            if (value == board.get(i, columnIndex)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // WARNING, rough calculations
+//    private int[][] createSquare(int rowIndex, int columnIndex, SudokuBoard board) { // 3x3
+//        int[][] square = new int[3][3];
+//        // determine coordiantes of sqaure:
+//        int row = 2 - ((8 - rowIndex) / 3);
+//        int column = 2 - ((8 - columnIndex) / 3);
+//        System.out.println("row: " + row + " column: " + column);
+//
+//        int row2 = row*3;
+//        int column2 = column*3;
+//
+//        for (int i = row2; i < row2+2; i++) {
+//            for (int j = column2; j < column2+2; j++) {
+//                square[i%3][j%3] = board.get(i, j);
+//            }
+//        }
+//
+//        System.out.println(Arrays.deepToString(square));
+//        return square;
+//    }
+
+    private boolean isFull(SudokuBoard board) {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
-                if (board[row][column] == 0) {
+                if (board.get(row,column) == 0) {
                     return false;
                 }
             }

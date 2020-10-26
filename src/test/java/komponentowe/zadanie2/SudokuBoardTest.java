@@ -14,7 +14,7 @@ public class SudokuBoardTest {
     @BeforeEach
     void setupBoard() {
         testBoard = new SudokuBoard();
-        testBoard.fillBoard();
+        testBoard.solveGame();
         rows = new int[9][9];
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
@@ -120,7 +120,7 @@ public class SudokuBoardTest {
     @RepeatedTest(10)
     void fillBoardUniqueSudokuTest() {
         SudokuBoard testBoard2 = new SudokuBoard();
-        testBoard2.fillBoard();
+        testBoard2.solveGame();
 
         assertNotEquals(testBoard, testBoard2);
     }
