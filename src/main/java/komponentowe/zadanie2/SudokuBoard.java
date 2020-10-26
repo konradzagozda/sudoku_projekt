@@ -17,30 +17,30 @@ public class SudokuBoard {
         fillRecursively(board);
     }
 
-    private boolean fillRecursively(int[][] sudokuBoard) {
+    private boolean fillRecursively(int[][] board) {
         // find next empty cell:
         int rowIndex = 0;
         int columnIndex = 0;
         for (int i = 0; i < 81; i++) {
             rowIndex = i / 9;
             columnIndex = i % 9;
-            if (sudokuBoard[rowIndex][columnIndex] == 0) {
+            if (board[rowIndex][columnIndex] == 0) {
                 // make it random:
                 List<Integer> values = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
                 Collections.shuffle(values);
                 for (Integer value : values) {
                     // check that value has not been used in a row:
-                    if (IntStream.of(sudokuBoard[rowIndex]).noneMatch(x -> x == value)) {
+                    if (IntStream.of(board[rowIndex]).noneMatch(x -> x == value)) {
                         int[] column = new int[]{
-                                sudokuBoard[0][columnIndex],
-                                sudokuBoard[1][columnIndex],
-                                sudokuBoard[2][columnIndex],
-                                sudokuBoard[3][columnIndex],
-                                sudokuBoard[4][columnIndex],
-                                sudokuBoard[5][columnIndex],
-                                sudokuBoard[6][columnIndex],
-                                sudokuBoard[7][columnIndex],
-                                sudokuBoard[8][columnIndex]
+                                board[0][columnIndex],
+                                board[1][columnIndex],
+                                board[2][columnIndex],
+                                board[3][columnIndex],
+                                board[4][columnIndex],
+                                board[5][columnIndex],
+                                board[6][columnIndex],
+                                board[7][columnIndex],
+                                board[8][columnIndex]
                         };
                         // check that value has not been used in a column:
                         if (IntStream.of(column).noneMatch(x -> x == value)) {
@@ -114,10 +114,10 @@ public class SudokuBoard {
                                 // now we can try the number...
                                 setField(rowIndex, columnIndex, value);
                                 // magic is happening here:
-                                if (isFull(sudokuBoard)) {
+                                if (isFull(board)) {
                                     return true;
                                 } else {
-                                    if (fillRecursively(sudokuBoard)) {
+                                    if (fillRecursively(board)) {
                                         return true;
                                     }
                                 }
@@ -156,10 +156,10 @@ public class SudokuBoard {
         }
     }
 
-    private boolean isFull(int[][] sudokuBoard) {
+    private boolean isFull(int[][] board) {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
-                if (sudokuBoard[row][column] == 0) {
+                if (board[row][column] == 0) {
                     return false;
                 }
             }
