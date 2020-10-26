@@ -168,8 +168,7 @@ public class SudokuBoard {
     }
 
     public void printBoard() {
-        for (int[] row : sudokuBoard
-        ) {
+        for (int[] row : sudokuBoard) {
             System.out.println(Arrays.toString(row));
         }
     }
