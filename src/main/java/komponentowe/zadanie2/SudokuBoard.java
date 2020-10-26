@@ -7,14 +7,14 @@ import java.util.stream.IntStream;
 
 public class SudokuBoard {
 
-    private final int[][] sudokuBoard;
+    private final int[][] board;
 
     public SudokuBoard() {
-        sudokuBoard = new int[9][9];
+        board = new int[9][9];
     }
 
     public void fillBoard() {
-        fillRecursively(sudokuBoard);
+        fillRecursively(board);
     }
 
     private boolean fillRecursively(int[][] sudokuBoard) {
@@ -141,16 +141,16 @@ public class SudokuBoard {
             return false;
         }
         SudokuBoard that = (SudokuBoard) o;
-        return Arrays.deepEquals(sudokuBoard, that.sudokuBoard);
+        return Arrays.deepEquals(board, that.board);
     }
 
     public void setField(int x, int y, int value) {
-        sudokuBoard[x][y] = value;
+        board[x][y] = value;
     }
 
     public int get(int rowIndex, int columnIndex) {
         if (columnIndex < 9 && rowIndex < 9) {
-            return sudokuBoard[rowIndex][columnIndex];
+            return board[rowIndex][columnIndex];
         } else {
             return 0;
         }
@@ -168,7 +168,7 @@ public class SudokuBoard {
     }
 
     public void printBoard() {
-        for (int[] row : sudokuBoard
+        for (int[] row : board
         ) {
             System.out.println(Arrays.toString(row));
         }
