@@ -138,7 +138,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     // WARNING, rough calculations
 //    private int[][] createSquare(int rowIndex, int columnIndex, SudokuBoard board) { // 3x3
 //        int[][] square = new int[3][3];
-//        // determine coordiantes of sqaure:
+//        // determine coordinates of square:
 //        int row = 2 - ((8 - rowIndex) / 3);
 //        int column = 2 - ((8 - columnIndex) / 3);
 //        System.out.println("row: " + row + " column: " + column);
