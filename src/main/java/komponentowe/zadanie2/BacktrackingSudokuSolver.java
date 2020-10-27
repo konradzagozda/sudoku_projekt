@@ -117,7 +117,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return false;
     }
 
-    private boolean checkInRow(int value, int rowIndex, SudokuBoard board){
+    private boolean checkInRow(int value, int rowIndex, SudokuBoard board) {
         for (int i = 0; i < 9; i++) {
             if (value == board.get(rowIndex, i)) {
                 return false;
@@ -126,7 +126,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return true;
     }
 
-    private boolean checkInColumn(int value, int columnIndex, SudokuBoard board){
+    private boolean checkInColumn(int value, int columnIndex, SudokuBoard board) {
         for (int i = 0; i < 9; i++) {
             if (value == board.get(i, columnIndex)) {
                 return false;
@@ -135,31 +135,10 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return true;
     }
 
-    // WARNING, rough calculations
-//    private int[][] createSquare(int rowIndex, int columnIndex, SudokuBoard board) { // 3x3
-//        int[][] square = new int[3][3];
-//        // determine coordinates of square:
-//        int row = 2 - ((8 - rowIndex) / 3);
-//        int column = 2 - ((8 - columnIndex) / 3);
-//        System.out.println("row: " + row + " column: " + column);
-//
-//        int row2 = row*3;
-//        int column2 = column*3;
-//
-//        for (int i = row2; i < row2+2; i++) {
-//            for (int j = column2; j < column2+2; j++) {
-//                square[i%3][j%3] = board.get(i, j);
-//            }
-//        }
-//
-//        System.out.println(Arrays.deepToString(square));
-//        return square;
-//    }
-
     private boolean isFull(SudokuBoard board) {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
-                if (board.get(row,column) == 0) {
+                if (board.get(row, column) == 0) {
                     return false;
                 }
             }
