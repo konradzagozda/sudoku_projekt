@@ -89,7 +89,7 @@ public class SudokuBoard {
     }
 
     public void set(int x, int y, int value) {
-        if (value <= 9 && value >= 0) {
+        if (x < 9 && x >= 0 && y < 9 && y >= 0 && value <= 9 && value >= 0) {
             board[x][y] = value;
         }
     }

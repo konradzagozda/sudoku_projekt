@@ -24,30 +24,35 @@ public class SudokuBoardTest {
     }
 
     @Test
-    void getTest(){
+    void getTest() {
         // test limit values...
-        testBoard.set(0,0,9);
-        assertEquals(9, testBoard.get(0,0));
-        testBoard.set(8,8, 3);
+        testBoard.set(0, 0, 9);
+        assertEquals(9, testBoard.get(0, 0));
+        testBoard.set(8, 8, 3);
         assertEquals(3, testBoard.get(8, 8));
 
         // test middle...
-        testBoard.set(5,5,5);
+        testBoard.set(5, 5, 5);
         assertEquals(5, testBoard.get(5, 5));
 
         // test incorrect... (should be -1)
         assertEquals(-1, testBoard.get(10, 10));
+        assertEquals(-1,testBoard.get(-1,-1));
     }
 
 
     @Test
-    void setTest(){
-        testBoard.set(5,5, 8);
-        assertEquals(8, testBoard.get(5,5));
+    void setTest() {
+        // we can test putting in wrong values, but not wrong coordinates
+        testBoard.set(5, 5, 8);
+        assertEquals(8, testBoard.get(5, 5));
         testBoard.set(5, 5, 10); // won't work because 10 is not in 0..9.
-        assertEquals(8, testBoard.get(5,5));
-        testBoard.set(5,5,0); // 0 is fine
+        assertEquals(8, testBoard.get(5, 5));
+        testBoard.set(5, 5, 0); // 0 is fine
+        assertEquals(0, testBoard.get(5, 5));
+        testBoard.set(5,5,-1); // -1 won't work
         assertEquals(0, testBoard.get(5,5));
+
     }
 
     @Test
@@ -70,6 +75,48 @@ public class SudokuBoardTest {
         testBoard2.solveGame();
 
         assertNotEquals(testBoard, testBoard2);
+    }
+
+
+    // assuming testBoard has been filled out correctly checks should return true for 0 and false for 1..9
+    @Test
+    void checkInColumnTest() {
+        for (int i = 0; i < 9; i++) {
+            assertTrue(SudokuBoard.checkInColumn(0, i, testBoard));
+        }
+        for (int i = 1; i < 10; i++) {
+            for (int j = 0; j < 9; j++) {
+                assertFalse(SudokuBoard.checkInColumn(i, j, testBoard));
+            }
+        }
+    }
+
+    @Test
+    void checkInRowTest() {
+        for (int i = 0; i < 9; i++) {
+            assertTrue(SudokuBoard.checkInRow(0, i, testBoard));
+        }
+        for (int i = 1; i < 10; i++) {
+            for (int j = 0; j < 9; j++) {
+                assertFalse(SudokuBoard.checkInRow(i, j, testBoard));
+            }
+        }
+    }
+
+    @Test
+    void checkInSquareTest() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                assertTrue(SudokuBoard.checkInSquare(0, i, j, testBoard));
+            }
+        }
+        for (int i = 1; i < 10; i++) {
+            for (int j = 0; j < 9; j++) {
+                for (int k = 0; k < 9; k++) {
+                    assertFalse(SudokuBoard.checkInSquare(i, j, k, testBoard));
+                }
+            }
+        }
     }
 }
 
