@@ -28,74 +28,8 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                     if (SudokuBoard.checkInRow(value, rowIndex, board)) {
                         // check that value has not been used in a column:
                         if (SudokuBoard.checkInColumn(value, columnIndex, board)) {
-                            // find out which square we are in:
-                            int[][] square = new int[3][3];
-
-                            if (rowIndex < 3) {
-                                if (columnIndex < 3) {
-                                    for (int j = 0; j < 3; j++) {
-                                        for (int k = 0; k < 3; k++) {
-                                            square[j][k] = board.get(j, k);
-                                        }
-                                    }
-                                } else if (columnIndex < 6) {
-                                    for (int j = 0; j < 3; j++) {
-                                        for (int k = 3; k < 6; k++) {
-                                            square[j][k % 3] = board.get(j, k);
-                                        }
-                                    }
-                                } else { // columnIndex [6..8]
-                                    for (int j = 0; j < 3; j++) {
-                                        for (int k = 6; k < 9; k++) {
-                                            square[j][k % 3] = board.get(j, k);
-                                        }
-                                    }
-                                }
-                            } else if (rowIndex < 6) {
-                                if (columnIndex < 3) {
-                                    for (int j = 3; j < 6; j++) {
-                                        for (int k = 0; k < 3; k++) {
-                                            square[j % 3][k] = board.get(j, k);
-                                        }
-                                    }
-                                } else if (columnIndex < 6) {
-                                    for (int j = 3; j < 6; j++) {
-                                        for (int k = 3; k < 6; k++) {
-                                            square[j % 3][k % 3] = board.get(j, k);
-                                        }
-                                    }
-                                } else { // columnIndex [6..8]
-                                    for (int j = 3; j < 6; j++) {
-                                        for (int k = 6; k < 9; k++) {
-                                            square[j % 3][k % 3] = board.get(j, k);
-                                        }
-                                    }
-                                }
-                            } else { // rowIndex [6..8]
-                                if (columnIndex < 3) {
-                                    for (int j = 6; j < 9; j++) {
-                                        for (int k = 0; k < 3; k++) {
-                                            square[j % 3][k] = board.get(j, k);
-                                        }
-                                    }
-                                } else if (columnIndex < 6) {
-                                    for (int j = 6; j < 9; j++) {
-                                        for (int k = 3; k < 6; k++) {
-                                            square[j % 3][k % 3] = board.get(j, k);
-                                        }
-                                    }
-                                } else { // columnIndex [6..8]
-                                    for (int j = 6; j < 9; j++) {
-                                        for (int k = 6; k < 9; k++) {
-                                            square[j % 3][k % 3] = board.get(j, k);
-                                        }
-                                    }
-                                }
-                            }
                             // check that value has not been used in a square:
-                            if ((IntStream.of(square[0]).noneMatch(x -> x == value)
-                                    && IntStream.of(square[1]).noneMatch(x -> x == value)
-                                    && IntStream.of(square[2]).noneMatch(x -> x == value))) {
+                            if (SudokuBoard.checkInSquare(value, rowIndex, columnIndex, board)) {
                                 // now we can try the number...
                                 board.set(rowIndex, columnIndex, value);
                                 // magic is happening here:

@@ -59,7 +59,7 @@ public class SudokuBoardTest {
                 assertNotEquals(0, elem);
                 // if here's no 0's then solver has been called,
                 // and method's responsibility is to call solver.
-                //!!! test won't work if solver is invalid
+                // failing this test means solver failed.
             }
         }
     }
