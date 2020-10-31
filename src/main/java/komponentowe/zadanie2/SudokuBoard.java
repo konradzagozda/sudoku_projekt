@@ -33,6 +33,36 @@ public class SudokuBoard {
         }
     }
 
+    static boolean checkInRow(int value, int rowIndex, SudokuBoard board) {
+        for (int i = 0; i < 9; i++) {
+            if (value == board.get(rowIndex, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static boolean checkInColumn(int value, int columnIndex, SudokuBoard board) {
+        for (int i = 0; i < 9; i++) {
+            if (value == board.get(i, columnIndex)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static boolean isFull(SudokuBoard board) {
+        for (int row = 0; row < 9; row++) {
+            for (int column = 0; column < 9; column++) {
+                if (board.get(row, column) == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

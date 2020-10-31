@@ -25,9 +25,9 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                 Collections.shuffle(values);
                 for (Integer value : values) {
                     // check that value has not been used in a row:
-                    if (checkInRow(value, rowIndex, board)) {
+                    if (SudokuBoard.checkInRow(value, rowIndex, board)) {
                         // check that value has not been used in a column:
-                        if (checkInColumn(value, columnIndex, board)) {
+                        if (SudokuBoard.checkInColumn(value, columnIndex, board)) {
                             // find out which square we are in:
                             int[][] square = new int[3][3];
 
@@ -99,7 +99,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                                 // now we can try the number...
                                 board.set(rowIndex, columnIndex, value);
                                 // magic is happening here:
-                                if (isFull(board)) {
+                                if (SudokuBoard.isFull(board)) {
                                     return true;
                                 } else {
                                     if (fillRecursively(board)) {
@@ -115,35 +115,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         }
         board.set(rowIndex, columnIndex, 0);
         return false;
-    }
-
-    private boolean checkInRow(int value, int rowIndex, SudokuBoard board) {
-        for (int i = 0; i < 9; i++) {
-            if (value == board.get(rowIndex, i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean checkInColumn(int value, int columnIndex, SudokuBoard board) {
-        for (int i = 0; i < 9; i++) {
-            if (value == board.get(i, columnIndex)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isFull(SudokuBoard board) {
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
-                if (board.get(row, column) == 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
 
