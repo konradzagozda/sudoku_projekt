@@ -3,7 +3,6 @@ package komponentowe.zadanie2;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
@@ -29,7 +28,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                         // check that value has not been used in a column:
                         if (SudokuBoard.checkInColumn(value, columnIndex, board)) {
                             // check that value has not been used in a square:
-                            if (SudokuBoard.checkInSquare(value, rowIndex, columnIndex, board)) {
+                            if (SudokuBoard.checkInSquare(value, columnIndex, rowIndex, board)) {
                                 // now we can try the number...
                                 board.set(rowIndex, columnIndex, value);
                                 // magic is happening here:

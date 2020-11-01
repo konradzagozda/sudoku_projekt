@@ -1,9 +1,6 @@
 package komponentowe.zadanie2;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.IntStream;
 
 public class SudokuBoard {
 
@@ -26,25 +23,30 @@ public class SudokuBoard {
         return true;
     }
 
-    static boolean checkInRow(int value, int rowIndex, SudokuBoard board) {
+    // y - row index
+    static boolean checkInRow(int value, int y, SudokuBoard board) {
         for (int i = 0; i < 9; i++) {
-            if (value == board.get(rowIndex, i)) {
+            if (value == board.get(y, i)) {
                 return false;
             }
         }
         return true;
     }
 
-    static boolean checkInColumn(int value, int columnIndex, SudokuBoard board) {
+    // x - column index
+    static boolean checkInColumn(int value, int x, SudokuBoard board) {
         for (int i = 0; i < 9; i++) {
-            if (value == board.get(i, columnIndex)) {
+            if (value == board.get(i, x)) {
                 return false;
             }
         }
         return true;
     }
 
-    static boolean checkInSquare(int value, int rowIndex, int columnIndex, SudokuBoard board) {
+
+    // y - row index
+    // x - column index
+    static boolean checkInSquare(int value, int x, int y, SudokuBoard board) {
         int[] square = new int[9];
         // 0 1 2 => 0   x / 3 = 0
         // 3 4 5 => 1   x / 3 = 1
@@ -55,8 +57,8 @@ public class SudokuBoard {
         // if 0 => 0 1 2  x * 3 + 0 , x * 3 + 1, x * 3 + 2
         // if 1 => 3 4 5  x * 3 + 0 , x * 3 + 1, x * 3 + 2
         // if 2 => 6 7 8  x * 3 + 0 , x * 3 + 1, x * 3 + 2
-        int squareRow = rowIndex / 3;
-        int squareColumn = columnIndex / 3;
+        int squareRow = y / 3;
+        int squareColumn = x / 3;
         int[] rowsToIterate = new int[3];
         int[] columnsToIterate = new int[3];
         for (int i = 0; i < 3; i++) {
@@ -90,13 +92,13 @@ public class SudokuBoard {
 
     public void set(int x, int y, int value) {
         if (x < 9 && x >= 0 && y < 9 && y >= 0 && value <= 9 && value >= 0) {
-            board[x][y] = value;
+            board[y][x] = value;
         }
     }
 
-    public int get(int rowIndex, int columnIndex) {
-        if (columnIndex < 9 && rowIndex < 9 && columnIndex >= 0 && rowIndex >= 0) {
-            return board[rowIndex][columnIndex];
+    public int get(int x, int y) {
+        if (x < 9 && y < 9 && x >= 0 && y >= 0) {
+            return board[y][x];
         } else {
             return -1;
         }
@@ -112,5 +114,12 @@ public class SudokuBoard {
         }
         SudokuBoard that = (SudokuBoard) o;
         return Arrays.deepEquals(board, that.board);
+    }
+
+    public void printBoard() {
+        for (int[] row : board
+        ) {
+            System.out.println(Arrays.toString(row));
+        }
     }
 }

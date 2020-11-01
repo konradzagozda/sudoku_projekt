@@ -2,8 +2,6 @@ package komponentowe.zadanie2;
 
 import org.junit.jupiter.api.*;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuBoardTest {
@@ -37,7 +35,7 @@ public class SudokuBoardTest {
 
         // test incorrect... (should be -1)
         assertEquals(-1, testBoard.get(10, 10));
-        assertEquals(-1,testBoard.get(-1,-1));
+        assertEquals(-1, testBoard.get(-1, -1));
     }
 
 
@@ -50,8 +48,8 @@ public class SudokuBoardTest {
         assertEquals(8, testBoard.get(5, 5));
         testBoard.set(5, 5, 0); // 0 is fine
         assertEquals(0, testBoard.get(5, 5));
-        testBoard.set(5,5,-1); // -1 won't work
-        assertEquals(0, testBoard.get(5,5));
+        testBoard.set(5, 5, -1); // -1 won't work
+        assertEquals(0, testBoard.get(5, 5));
 
     }
 
@@ -107,16 +105,21 @@ public class SudokuBoardTest {
     void checkInSquareTest() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                assertTrue(SudokuBoard.checkInSquare(0, i, j, testBoard));
+                assertTrue(SudokuBoard.checkInSquare(0, j, i, testBoard));
             }
         }
         for (int i = 1; i < 10; i++) {
             for (int j = 0; j < 9; j++) {
                 for (int k = 0; k < 9; k++) {
-                    assertFalse(SudokuBoard.checkInSquare(i, j, k, testBoard));
+                    assertFalse(SudokuBoard.checkInSquare(i, k, j, testBoard));
                 }
             }
         }
+    }
+
+    @RepeatedTest(5)
+    void printTest() {
+        testBoard.printBoard();
     }
 }
 
