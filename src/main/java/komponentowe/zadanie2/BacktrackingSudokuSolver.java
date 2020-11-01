@@ -13,24 +13,24 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
 
     private boolean fillRecursively(SudokuBoard board) {
         // find next empty cell:
-        int rowIndex = 0;
-        int columnIndex = 0;
+        int y = 0;
+        int x = 0;
         for (int i = 0; i < 81; i++) {
-            rowIndex = i / 9;
-            columnIndex = i % 9;
-            if (board.get(rowIndex, columnIndex) == 0) {
+            y = i / 9;
+            x = i % 9;
+            if (board.get(x, y) == 0) {
                 // make it random:
                 List<Integer> values = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
                 Collections.shuffle(values);
                 for (Integer value : values) {
-                    // check that value has not been used in a row:
-                    if (SudokuBoard.checkInRow(value, rowIndex, board)) {
+                    // create row:
+                    if (board.getRow(y).tryValue(value).verify()) {
                         // check that value has not been used in a column:
-                        if (SudokuBoard.checkInColumn(value, columnIndex, board)) {
+                        if (board.getColumn(x).tryValue(value).verify()) {
                             // check that value has not been used in a square:
-                            if (SudokuBoard.checkInSquare(value, columnIndex, rowIndex, board)) {
+                            if (board.getBox(x,y).tryValue(value).verify()) {
                                 // now we can try the number...
-                                board.set(rowIndex, columnIndex, value);
+                                board.set(x, y, value);
                                 // magic is happening here:
                                 if (SudokuBoard.isFull(board)) {
                                     return true;
@@ -46,7 +46,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                 break;
             }
         }
-        board.set(rowIndex, columnIndex, 0);
+        board.set(x, y, 0);
         return false;
     }
 }

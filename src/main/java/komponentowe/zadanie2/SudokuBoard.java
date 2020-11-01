@@ -4,11 +4,17 @@ import java.util.Arrays;
 
 public class SudokuBoard {
 
-    private final int[][] board;
+    private final SudokuField[][] board;
     SudokuSolver solver;
 
     public SudokuBoard(SudokuSolver solver) {
-        board = new int[9][9];
+        board = new SudokuField[9][9];
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                board[y][x] = new SudokuField();
+            }
+        }
+
         this.solver = solver;
     }
 
@@ -23,67 +29,18 @@ public class SudokuBoard {
         return true;
     }
 
-    // y - row index
-    static boolean checkInRow(int value, int y, SudokuBoard board) {
-        for (int i = 0; i < 9; i++) {
-            if (value == board.get(y, i)) {
-                return false;
+    /**
+     * used for debugging purposes only
+     */
+    public static String get2DArrayPrint(SudokuField[][] matrix) {
+        StringBuilder output = new StringBuilder();
+        for (SudokuField[] sudokuFields : matrix) {
+            for (SudokuField sudokuField : sudokuFields) {
+                output.append(sudokuField.getFieldValue()).append("\t");
             }
+            output.append("\n");
         }
-        return true;
-    }
-
-    // x - column index
-    static boolean checkInColumn(int value, int x, SudokuBoard board) {
-        for (int i = 0; i < 9; i++) {
-            if (value == board.get(i, x)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-    // y - row index
-    // x - column index
-    static boolean checkInSquare(int value, int x, int y, SudokuBoard board) {
-        int[] square = new int[9];
-        // 0 1 2 => 0   x / 3 = 0
-        // 3 4 5 => 1   x / 3 = 1
-        // 6 7 8 => 2   x / 3 = 2
-        // now we know the square...
-        // find out numbers to iterate...
-        // for row or column:
-        // if 0 => 0 1 2  x * 3 + 0 , x * 3 + 1, x * 3 + 2
-        // if 1 => 3 4 5  x * 3 + 0 , x * 3 + 1, x * 3 + 2
-        // if 2 => 6 7 8  x * 3 + 0 , x * 3 + 1, x * 3 + 2
-        int squareRow = y / 3;
-        int squareColumn = x / 3;
-        int[] rowsToIterate = new int[3];
-        int[] columnsToIterate = new int[3];
-        for (int i = 0; i < 3; i++) {
-            rowsToIterate[i] = squareRow * 3 + i;
-            columnsToIterate[i] = squareColumn * 3 + i;
-        }
-        // fill in square...
-        int i = 0;
-        for (int row : rowsToIterate
-        ) {
-            for (int column : columnsToIterate
-            ) {
-                square[i] = board.get(row, column);
-                i++;
-            }
-        }
-        // check if value is not in square...
-        for (int elem : square
-        ) {
-            if (value == elem) {
-                return false;
-            }
-        }
-        return true;
-
+        return output.toString();
     }
 
     public void solveGame() {
@@ -92,18 +49,21 @@ public class SudokuBoard {
 
     public void set(int x, int y, int value) {
         if (x < 9 && x >= 0 && y < 9 && y >= 0 && value <= 9 && value >= 0) {
-            board[y][x] = value;
+            board[y][x] = new SudokuField(value);
         }
     }
 
     public int get(int x, int y) {
         if (x < 9 && y < 9 && x >= 0 && y >= 0) {
-            return board[y][x];
+            return board[y][x].getFieldValue();
         } else {
             return -1;
         }
     }
 
+    /**
+     * Used for testing equality of SudokuBoards used in tests.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,9 +77,53 @@ public class SudokuBoard {
     }
 
     public void printBoard() {
-        for (int[] row : board
+        for (SudokuField[] row : board
         ) {
-            System.out.println(Arrays.toString(row));
+            for (SudokuField elem : row
+            ) {
+                System.out.print(elem + " ");
+            }
+            System.out.println();
         }
+        System.out.println();
     }
+
+    public SudokuRow getRow(int y) {
+        SudokuField[] fields = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            fields[i] = new SudokuField(board[y][i]);
+        }
+        return new SudokuRow(fields);
+    }
+
+    public SudokuColumn getColumn(int x) {
+        SudokuField[] column = new SudokuField[9];
+        for (int y = 0; y < 9; y++) {
+            column[y] = new SudokuField(board[y][x]);
+        }
+        return new SudokuColumn(column);
+    }
+
+    public SudokuBox getBox(int x, int y) {
+        SudokuField[] box = new SudokuField[9];
+        int squareRow = y / 3;
+        int squareColumn = x / 3;
+        int[] rowsToIterate = new int[3];
+        int[] columnsToIterate = new int[3];
+        for (int i = 0; i < 3; i++) {
+            rowsToIterate[i] = squareRow * 3 + i;
+            columnsToIterate[i] = squareColumn * 3 + i;
+        }
+        int i = 0;
+        for (int row : rowsToIterate
+        ) {
+            for (int column : columnsToIterate
+            ) {
+                box[i] = new SudokuField(board[row][column]);
+                i++;
+            }
+        }
+        return new SudokuBox(box);
+    }
+
 }

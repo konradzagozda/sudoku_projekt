@@ -1,4 +1,24 @@
 package komponentowe.zadanie2;
 
-public class SudokuColumn {
+import java.util.Arrays;
+
+public class SudokuColumn extends SudokuStructure {
+    public SudokuColumn() {
+        super();
+    }
+
+    public SudokuColumn(SudokuField[] fields) {
+        super(fields);
+    }
+
+    @Override
+    public SudokuColumn tryValue(int value) {
+        for (int i = 0; i < 9; i++) {
+            if (fields[i].getFieldValue() == 0) {
+                fields[i].setFieldValue(value);
+                return new SudokuColumn(fields);
+            }
+        }
+        return new SudokuColumn(fields);
+    }
 }
