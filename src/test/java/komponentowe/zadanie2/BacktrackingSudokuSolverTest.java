@@ -10,10 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class BacktrackingSudokuSolverTest {
 
     SudokuBoard sudokuBoard;
+    SudokuField[][] sudokuFields;
+
 
     @BeforeEach
     void createSudokuBoard() {
-        sudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver());
+        sudokuFields = new SudokuField[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sudokuFields[i][j] = new SudokuField();
+            }
+        }
+        sudokuBoard = new SudokuBoard(sudokuFields, new BacktrackingSudokuSolver());
     }
 
     @Test

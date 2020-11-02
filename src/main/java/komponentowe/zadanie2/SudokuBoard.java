@@ -9,13 +9,8 @@ public class SudokuBoard {
     private final SudokuField[][] board;
     SudokuSolver solver;
 
-    public SudokuBoard(SudokuSolver solver) {
-        board = new SudokuField[9][9];
-        for (int y = 0; y < 9; y++) {
-            for (int x = 0; x < 9; x++) {
-                board[y][x] = new SudokuField();
-            }
-        }
+    public SudokuBoard(SudokuField[][] board, SudokuSolver solver) {
+        this.board = board;
         this.solver = solver;
     }
 
@@ -56,7 +51,7 @@ public class SudokuBoard {
     }
 
     public void set(int x, int y, int value) throws IllegalArgumentException {
-        if (x < 9 && x >= 0 && y < 9 && y >= 0 && value <= 9 && value >= 0) {
+        if ((x < 9 && x >= 0) && (y < 9 && y >= 0) && (value <= 9 && value >= 0)) {
             board[y][x] = new SudokuField(value);
         } else {
             throw new IllegalArgumentException("Wrong coordinates or value");
@@ -70,6 +65,20 @@ public class SudokuBoard {
             throw new IllegalArgumentException("Wrong coordinates...");
         }
     }
+
+
+
+    // debugging purposes method
+    //    public static String get2DArrayPrint(SudokuField[][] matrix) {
+    //        StringBuilder output = new StringBuilder();
+    //        for (SudokuField[] sudokuFields : matrix) {
+    //            for (SudokuField sudokuField : sudokuFields) {
+    //                output.append(sudokuField.getFieldValue()).append("\t");
+    //            }
+    //            output.append("\n");
+    //        }
+    //        return output.toString();
+    //    }
 
     /**
      * Used for testing equality of SudokuBoards used in tests.

@@ -7,12 +7,17 @@ public abstract class SudokuStructure {
 
 
     public SudokuStructure(SudokuField[] fields) {
-        this.fields = fields;
+        this.fields = new SudokuField[9];
+        for (int i = 0; i < 9; i++) {
+            this.fields[i] = new SudokuField(fields[i].getFieldValue());
+        }
+
     }
 
     /**
      * Used to verify if current state of structure is correct => meaning there are no duplicates
      * other than 0s.
+     *
      * @return true if values are unique (0s are ignored)
      */
     public boolean verify() {
@@ -36,5 +41,14 @@ public abstract class SudokuStructure {
     }
 
 
-    public abstract <T extends SudokuStructure> T tryValue(int value);
+    public SudokuStructure tryValue(int value) {
+        for (int i = 0; i < 9; i++) {
+            if (fields[i].getFieldValue() == 0) {
+                fields[i].setFieldValue(value);
+                return this;
+            }
+        }
+        return this;
+    }
+
 }

@@ -30,7 +30,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                         // check that value has not been used in a column:
                         if (board.getColumn(x).tryValue(value).verify()) {
                             // check that value has not been used in a square:
-                            if (board.getBox(x, y).tryValue(value).verify()) {
+                            if (board.getBox(x,y).tryValue(value).verify()) {
                                 // now we can try the number...
                                 board.set(x, y, value);
                                 // magic is happening here:
