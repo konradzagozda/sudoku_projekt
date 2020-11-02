@@ -32,7 +32,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                                 // now we can try the number...
                                 board.set(x, y, value);
                                 // magic is happening here:
-                                if (SudokuBoard.isFull(board)) {
+                                if (board.isFull()) {
                                     return true;
                                 } else {
                                     if (fillRecursively(board)) {

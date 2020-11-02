@@ -1,6 +1,9 @@
 package komponentowe.zadanie2;
 
+
 import java.util.Arrays;
+import javax.security.auth.login.FailedLoginException;
+
 
 public class SudokuBoard {
 
@@ -14,14 +17,13 @@ public class SudokuBoard {
                 board[y][x] = new SudokuField();
             }
         }
-
         this.solver = solver;
     }
 
-    static boolean isFull(SudokuBoard board) {
+    boolean isFull() {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
-                if (board.get(row, column) == 0) {
+                if (get(row, column) == 0) {
                     return false;
                 }
             }
@@ -29,37 +31,44 @@ public class SudokuBoard {
         return true;
     }
 
-    /**
-     * Used for debugging purposes only.
-     * @param matrix - internal matrix of SudokuBoard
-     * @return String representation of SudokuField[][] matrix
-     */
-    public static String get2DArrayPrint(SudokuField[][] matrix) {
-        StringBuilder output = new StringBuilder();
-        for (SudokuField[] sudokuFields : matrix) {
-            for (SudokuField sudokuField : sudokuFields) {
-                output.append(sudokuField.getFieldValue()).append("\t");
+    private boolean checkBoard() {
+        for (int i = 0; i < 9; i++) {
+            if (!(getColumn(i).verify() && getRow(i).verify())) {
+                return false;
             }
-            output.append("\n");
         }
-        return output.toString();
+
+        for (int i = 0; i < 9; i += 3) {
+            for (int j = 0; j < 9; j += 3) {
+                if (!getBox(i, j).verify()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
-    public void solveGame() {
+    public void solveGame() throws FailedLoginException {
         solver.solve(this);
+        if (!checkBoard()) {
+            throw new FailedLoginException("Incorrect board generated...");
+        }
     }
 
-    public void set(int x, int y, int value) {
+    public void set(int x, int y, int value) throws IllegalArgumentException {
         if (x < 9 && x >= 0 && y < 9 && y >= 0 && value <= 9 && value >= 0) {
             board[y][x] = new SudokuField(value);
+        } else {
+            throw new IllegalArgumentException("Wrong coordinates or value");
         }
     }
 
-    public int get(int x, int y) {
+    public int get(int x, int y) throws IllegalArgumentException {
         if (x < 9 && y < 9 && x >= 0 && y >= 0) {
             return board[y][x].getFieldValue();
         } else {
-            return -1;
+            throw new IllegalArgumentException("Wrong coordinates...");
         }
     }
 
@@ -76,18 +85,6 @@ public class SudokuBoard {
         }
         SudokuBoard that = (SudokuBoard) o;
         return Arrays.deepEquals(board, that.board);
-    }
-
-    public void printBoard() {
-        for (SudokuField[] row : board
-        ) {
-            for (SudokuField elem : row
-            ) {
-                System.out.print(elem + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 
     public SudokuRow getRow(int y) {

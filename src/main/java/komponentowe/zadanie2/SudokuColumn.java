@@ -3,9 +3,6 @@ package komponentowe.zadanie2;
 import java.util.Arrays;
 
 public class SudokuColumn extends SudokuStructure {
-    public SudokuColumn() {
-        super();
-    }
 
     public SudokuColumn(SudokuField[] fields) {
         super(fields);

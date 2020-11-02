@@ -3,17 +3,11 @@ package komponentowe.zadanie2;
 import java.util.ArrayList;
 
 public abstract class SudokuStructure {
-    protected SudokuField[] fields = new SudokuField[9];
+    protected SudokuField[] fields;
 
 
     public SudokuStructure(SudokuField[] fields) {
         this.fields = fields;
-    }
-
-    public SudokuStructure() {
-        for (int i = 0; i < 9; i++) {
-            fields[i] = new SudokuField();
-        }
     }
 
     /**
