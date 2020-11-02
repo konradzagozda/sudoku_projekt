@@ -29,8 +29,12 @@ public class SudokuField {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SudokuField that = (SudokuField) o;
         return value == that.value;
     }

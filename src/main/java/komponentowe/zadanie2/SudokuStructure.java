@@ -17,6 +17,8 @@ public abstract class SudokuStructure {
     }
 
     /**
+     * Used to verify if current state of structure is correct => meaning there are no duplicates
+     * other than 0s.
      * @return true if values are unique (0s are ignored)
      */
     public boolean verify() {

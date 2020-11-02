@@ -30,7 +30,9 @@ public class SudokuBoard {
     }
 
     /**
-     * used for debugging purposes only
+     * Used for debugging purposes only.
+     * @param matrix - internal matrix of SudokuBoard
+     * @return String representation of SudokuField[][] matrix
      */
     public static String get2DArrayPrint(SudokuField[][] matrix) {
         StringBuilder output = new StringBuilder();
