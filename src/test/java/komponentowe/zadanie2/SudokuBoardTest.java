@@ -12,7 +12,7 @@ public class SudokuBoardTest {
     int[][] rows;
 
     @BeforeEach
-    void setupBoard() throws FailedLoginException {
+    void setupBoard() throws WrongSudokuStateException {
         testBoard = new SudokuBoard(new BacktrackingSudokuSolver());
         testBoard.solveGame();
         rows = new int[9][9];
@@ -79,7 +79,7 @@ public class SudokuBoardTest {
 
 
     @Test
-    void solveGameTest() throws FailedLoginException {
+    void solveGameTest() throws WrongSudokuStateException {
         // all fields are not 0s...
         SudokuBoard testBoard2 = new SudokuBoard(new BacktrackingSudokuSolver());
         testBoard2.solveGame();
@@ -96,12 +96,12 @@ public class SudokuBoardTest {
                 }
             }
         });
-        assertThrows(FailedLoginException.class, testBoard3::solveGame);
+        assertThrows(WrongSudokuStateException.class, testBoard3::solveGame);
 
     }
 
     @Test
-    void fillBoardUniqueSudokuTest() throws FailedLoginException {
+    void fillBoardUniqueSudokuTest() throws WrongSudokuStateException {
         SudokuBoard testBoard2 = new SudokuBoard(new BacktrackingSudokuSolver());
         testBoard2.solveGame();
 

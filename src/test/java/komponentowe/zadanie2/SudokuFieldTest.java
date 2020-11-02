@@ -13,7 +13,7 @@ class SudokuFieldTest {
     SudokuBoard board;
 
     @BeforeEach
-    void setup() throws FailedLoginException {
+    void setup() throws WrongSudokuStateException {
         board = new SudokuBoard(new BacktrackingSudokuSolver());
         board.solveGame();
     }

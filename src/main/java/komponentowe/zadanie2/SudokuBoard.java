@@ -2,7 +2,6 @@ package komponentowe.zadanie2;
 
 
 import java.util.Arrays;
-import javax.security.auth.login.FailedLoginException;
 
 
 public class SudokuBoard {
@@ -49,10 +48,10 @@ public class SudokuBoard {
         return true;
     }
 
-    public void solveGame() throws FailedLoginException {
+    public void solveGame() throws WrongSudokuStateException {
         solver.solve(this);
         if (!checkBoard()) {
-            throw new FailedLoginException("Incorrect board generated...");
+            throw new WrongSudokuStateException("Incorrect board generated...");
         }
     }
 
@@ -126,3 +125,4 @@ public class SudokuBoard {
     }
 
 }
+
