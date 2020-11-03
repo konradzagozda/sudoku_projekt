@@ -30,18 +30,6 @@ public class SudokuBoard {
     //    }
 
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (int y = 0; y < 9; y++) {
-            for (int x = 0; x < 9; x++) {
-                builder.append(get(x, y));
-            }
-            builder.append('\n');
-        }
-        return builder.toString();
-    }
-
     public void register(SudokuObserver o) {
         if (!sudokuObservers.contains(o)) {
             sudokuObservers.add(o);
