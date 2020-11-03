@@ -236,6 +236,27 @@ public class SudokuBoardTest {
         assertFalse(testBoard.equals(new Object()));
     }
 
+    @Test
+    void observersTest() {
+        String test = "empty";
+
+        var observer = new SudokuObserver() {
+            @Override
+            public void update(SudokuField[][] board) {
+                assertTrue(true);
+            }
+        };
+
+        assertEquals(0, testBoard.getSudokuObservers().size());
+        testBoard.register(observer);
+        testBoard.register(observer);
+        testBoard.register(observer);
+        assertEquals(1 , testBoard.getSudokuObservers().size());
+        testBoard.notifyObservers();
+        testBoard.unregister(observer);
+        assertEquals(0, testBoard.getSudokuObservers().size());
+    }
+
 
 }
 

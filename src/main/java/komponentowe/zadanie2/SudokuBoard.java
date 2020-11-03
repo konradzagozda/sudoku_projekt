@@ -16,6 +16,10 @@ public class SudokuBoard {
         this.solver = solver;
     }
 
+    public ArrayList<SudokuObserver> getSudokuObservers() {
+        return sudokuObservers;
+    }
+
     //    debugging purposes
     //
     //    public static String get2DArrayPrint(SudokuField[][] matrix) {

@@ -1,6 +1,7 @@
 package komponentowe.zadanie2;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -24,7 +25,7 @@ class BacktrackingSudokuSolverTest {
         sudokuBoard = new SudokuBoard(sudokuFields, new BacktrackingSudokuSolver());
     }
 
-    @Test
+    @RepeatedTest(20)
     void solveTest() {
         SudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudokuBoard);
