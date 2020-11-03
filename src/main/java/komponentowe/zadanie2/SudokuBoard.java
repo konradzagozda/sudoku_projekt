@@ -1,17 +1,62 @@
 package komponentowe.zadanie2;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class SudokuBoard {
 
     private final SudokuField[][] board;
+    private final ArrayList<SudokuObserver> sudokuObservers = new ArrayList<>();
     SudokuSolver solver;
 
     public SudokuBoard(SudokuField[][] board, SudokuSolver solver) {
         this.board = board;
         this.solver = solver;
+    }
+
+    //    debugging purposes
+    //
+    //    public static String get2DArrayPrint(SudokuField[][] matrix) {
+    //        StringBuilder output = new StringBuilder();
+    //        for (SudokuField[] sudokuFields : matrix) {
+    //            for (SudokuField sudokuField : sudokuFields) {
+    //                output.append(sudokuField.getFieldValue()).append("\t");
+    //            }
+    //            output.append("\n");
+    //        }
+    //        return output.toString();
+    //    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                builder.append(get(x, y));
+            }
+            builder.append('\n');
+        }
+        return builder.toString();
+    }
+
+    public void register(SudokuObserver o) {
+        if (!sudokuObservers.contains(o)) {
+            sudokuObservers.add(o);
+        }
+    }
+
+    public void unregister(SudokuObserver o) {
+        sudokuObservers.remove(o);
+    }
+
+    public void notifyObservers() {
+        for (SudokuObserver sudokuObserver : sudokuObservers
+        ) {
+            sudokuObserver.update(board);
+        }
     }
 
     boolean isFull() {
@@ -53,6 +98,7 @@ public class SudokuBoard {
     public void set(int x, int y, int value) throws IllegalArgumentException {
         if ((x < 9 && x >= 0) && (y < 9 && y >= 0) && (value <= 9 && value >= 0)) {
             board[y][x] = new SudokuField(value);
+            notifyObservers();
         } else {
             throw new IllegalArgumentException("Wrong coordinates or value");
         }
@@ -65,20 +111,6 @@ public class SudokuBoard {
             throw new IllegalArgumentException("Wrong coordinates...");
         }
     }
-
-
-
-    // debugging purposes method
-    //    public static String get2DArrayPrint(SudokuField[][] matrix) {
-    //        StringBuilder output = new StringBuilder();
-    //        for (SudokuField[] sudokuFields : matrix) {
-    //            for (SudokuField sudokuField : sudokuFields) {
-    //                output.append(sudokuField.getFieldValue()).append("\t");
-    //            }
-    //            output.append("\n");
-    //        }
-    //        return output.toString();
-    //    }
 
     /**
      * Used for testing equality of SudokuBoards used in tests.
