@@ -47,7 +47,8 @@ class SudokuFieldTest {
     @Test
     void hashCodeTest() {
         SudokuField sudokuField = new SudokuField();
-        assertEquals(sudokuField.hashCode(),Objects.hash(0));
+        SudokuField sudokuField2 = new SudokuField();
+        assertEquals(sudokuField.hashCode(),sudokuField2.hashCode());
     }
 
 

@@ -3,9 +3,14 @@ package komponentowe.zadanie2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 
 
 public class SudokuBoard {
+
 
     private final SudokuField[][] board;
     private final ArrayList<SudokuObserver> sudokuObservers = new ArrayList<>();
@@ -104,21 +109,6 @@ public class SudokuBoard {
         }
     }
 
-    /**
-     * Used for testing equality of SudokuBoards used in tests.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        SudokuBoard that = (SudokuBoard) o;
-        return Arrays.deepEquals(board, that.board);
-    }
-
     public SudokuRow getRow(int y) {
         SudokuField[] fields = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
@@ -156,6 +146,44 @@ public class SudokuBoard {
         }
         return new SudokuBox(box);
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof SudokuBoard)) {
+            return false;
+        }
+
+        SudokuBoard that = (SudokuBoard) o;
+
+        return new EqualsBuilder()
+                .append(board, that.board)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(board)
+                .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder arr = new StringBuilder();
+        for (SudokuField[] row : board
+        ) {
+            arr.append(Arrays.toString(row));
+        }
+        return new ToStringBuilder(this)
+                .append("board", arr.toString())
+                .toString();
+    }
+
 
 }
 
