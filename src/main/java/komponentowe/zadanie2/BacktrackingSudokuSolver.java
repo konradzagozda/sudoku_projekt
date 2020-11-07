@@ -1,8 +1,10 @@
 package komponentowe.zadanie2;
 
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.apache.commons.collections.list.FixedSizeList;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
@@ -22,7 +24,8 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             i++;
             if (board.get(x, y) == 0) {
                 // make it random:
-                List<Integer> values = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+                List<Integer> values =
+                        FixedSizeList.decorate(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
                 Collections.shuffle(values);
                 for (Integer value : values) {
                     // create row:
@@ -30,7 +33,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                         // check that value has not been used in a column:
                         if (board.getColumn(x).tryValue(value).verify()) {
                             // check that value has not been used in a square:
-                            if (board.getBox(x,y).tryValue(value).verify()) {
+                            if (board.getBox(x, y).tryValue(value).verify()) {
                                 // now we can try the number...
                                 board.set(x, y, value);
                                 // magic is happening here:
@@ -52,4 +55,3 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return false;
     }
 }
-
