@@ -50,7 +50,7 @@ public abstract class SudokuStructure {
         for (int i = 0; i < 9; i++) {
             if (fields[i].getFieldValue() == 0) {
                 fields[i].setFieldValue(value);
-                return this;
+                break;
             }
         }
         return this;

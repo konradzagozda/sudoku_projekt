@@ -25,7 +25,7 @@ class BacktrackingSudokuSolverTest {
         sudokuBoard = new SudokuBoard(sudokuFields, new BacktrackingSudokuSolver());
     }
 
-    @RepeatedTest(20)
+    @Test
     void solveTest() {
         SudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudokuBoard);
