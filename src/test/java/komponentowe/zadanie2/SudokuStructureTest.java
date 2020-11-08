@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SudokuRowTest {
+class SudokuStructureTest {
 
     SudokuField[] fields;
-    SudokuRow testRow;
+    SudokuStructure testRow;
+    SudokuStructure testRow2;
 
     @BeforeEach
     void setup() {
@@ -18,6 +19,7 @@ class SudokuRowTest {
         }
 
         testRow = new SudokuRow(fields);
+        testRow2 = new SudokuRow(fields);
     }
 
 
@@ -27,5 +29,24 @@ class SudokuRowTest {
         assertTrue(testRow.verify());
         testRow.tryValue(1);
         assertFalse(testRow.verify());
+    }
+
+
+    @Test
+    void equalsTest() {
+        assertTrue(testRow.equals(testRow));
+        assertTrue(testRow.equals(testRow2));
+        assertFalse(testRow.equals(null));
+    }
+
+    @Test
+    void hashCodeTest() {
+        assertTrue(testRow.hashCode() != 0);
+    }
+
+    @Test
+    void toStringTest(){
+        System.out.println(testRow.toString());
+        assertTrue(testRow.toString().length() != 0);
     }
 }

@@ -183,7 +183,5 @@ public class SudokuBoard {
                 .append("board", arr.toString())
                 .toString();
     }
-
-
 }
 

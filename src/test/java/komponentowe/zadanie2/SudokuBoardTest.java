@@ -258,6 +258,18 @@ public class SudokuBoardTest {
     }
 
 
+    @Test
+    void hashCodeTest() {
+        assertTrue(testBoard.hashCode() != 0);
+        assertTrue(testBoard.hashCode() == testBoard.hashCode());
+    }
+
+    @Test
+    void toStringTest() {
+        System.out.println(testBoard.toString());
+        assertTrue(0 != testBoard.toString().length());
+    }
+
 }
 
 
