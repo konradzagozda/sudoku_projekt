@@ -49,4 +49,14 @@ class SudokuStructureTest {
         System.out.println(testRow.toString());
         assertTrue(testRow.toString().length() != 0);
     }
+
+    @Test
+    void putValueTest() {
+        for (int i = 0; i < 9; i++) {
+            testRow.tryValue(i+1);
+            assertTrue(testRow.verify());
+        }
+        assertTrue(testRow.tryValue(4).verify());
+
+    }
 }

@@ -6,7 +6,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-
 public abstract class SudokuStructure {
     protected SudokuField[] fields;
 
@@ -50,7 +49,7 @@ public abstract class SudokuStructure {
         for (int i = 0; i < 9; i++) {
             if (fields[i].getFieldValue() == 0) {
                 fields[i].setFieldValue(value);
-                break;
+                return this;
             }
         }
         return this;
