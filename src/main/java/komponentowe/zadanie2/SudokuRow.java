@@ -1,9 +1,9 @@
 package komponentowe.zadanie2;
 
-public class SudokuRow extends SudokuStructure {
+import java.util.ArrayList;
 
-    public SudokuRow(SudokuField[] fields) {
+public class SudokuRow extends SudokuStructure {
+    public SudokuRow(/*SudokuField[]*/ArrayList<SudokuField> fields) {
         super(fields);
     }
-
 }

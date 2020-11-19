@@ -1,6 +1,5 @@
 package komponentowe.zadanie2;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -8,13 +7,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-
 public class SudokuBoard {
-
 
     private final SudokuField[][] board;
     private final ArrayList<SudokuObserver> sudokuObservers = new ArrayList<>();
     SudokuSolver solver;
+
 
     public SudokuBoard(SudokuField[][] board, SudokuSolver solver) {
         this.board = board;
@@ -37,7 +35,6 @@ public class SudokuBoard {
     //        }
     //        return output.toString();
     //    }
-
 
     public void register(SudokuObserver o) {
         if (!sudokuObservers.contains(o)) {
@@ -110,23 +107,26 @@ public class SudokuBoard {
     }
 
     public SudokuRow getRow(int y) {
-        SudokuField[] fields = new SudokuField[9];
+        ArrayList<SudokuField> fields = new ArrayList<>(9);
+        //SudokuField[] fields = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
-            fields[i] = new SudokuField(board[y][i]);
+            fields.set(i, new SudokuField(board[y][i]));
         }
         return new SudokuRow(fields);
     }
 
     public SudokuColumn getColumn(int x) {
-        SudokuField[] column = new SudokuField[9];
+        ArrayList<SudokuField> column = new ArrayList<>(9);
+        //SudokuField[] column = new SudokuField[9];
         for (int y = 0; y < 9; y++) {
-            column[y] = new SudokuField(board[y][x]);
+            column.set(y, new SudokuField(board[y][x]));
         }
         return new SudokuColumn(column);
     }
 
     public SudokuBox getBox(int x, int y) {
-        SudokuField[] box = new SudokuField[9];
+        ArrayList<SudokuField> box = new ArrayList<>(9);
+        //SudokuField[] box = new SudokuField[9];
         int squareRow = y / 3;
         int squareColumn = x / 3;
         int[] rowsToIterate = new int[3];
@@ -140,13 +140,12 @@ public class SudokuBoard {
         ) {
             for (int column : columnsToIterate
             ) {
-                box[i] = new SudokuField(board[row][column]);
+                box.set(i, new SudokuField(board[row][column]));
                 i++;
             }
         }
         return new SudokuBox(box);
     }
-
 
     @Override
     public boolean equals(Object o) {

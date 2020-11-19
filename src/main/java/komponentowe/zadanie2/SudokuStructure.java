@@ -7,15 +7,15 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 public abstract class SudokuStructure {
-    protected SudokuField[] fields;
+   // protected SudokuField[] fields;
+    private ArrayList<SudokuField> fields = new ArrayList<>();
 
 
-    public SudokuStructure(SudokuField[] fields) {
-        this.fields = new SudokuField[9];
+    public SudokuStructure(/*SudokuField[]*/ArrayList<SudokuField> fields) {
+        this.fields = new /*SudokuField[9]*/ArrayList<>(9);
         for (int i = 0; i < 9; i++) {
-            this.fields[i] = new SudokuField(fields[i].getFieldValue());
+            this.fields.set(i, new SudokuField(fields.get(i).getFieldValue()));
         }
-
     }
 
     /**
@@ -26,35 +26,30 @@ public abstract class SudokuStructure {
      */
     public boolean verify() {
         ArrayList<Integer> allFields = new ArrayList<>();
-        for (SudokuField field : fields
-        ) {
+        for (SudokuField field : fields) {
             if (field.getFieldValue() != 0) {
                 allFields.add(field.getFieldValue());
             }
         }
 
         ArrayList<Integer> noDuplicates = new ArrayList<>();
-        for (Integer value : allFields
-        ) {
+        for (Integer value : allFields) {
             if (!noDuplicates.contains(value)) {
                 noDuplicates.add(value);
             }
         }
-
         return noDuplicates.size() == allFields.size();
     }
 
-
     public SudokuStructure tryValue(int value) {
         for (int i = 0; i < 9; i++) {
-            if (fields[i].getFieldValue() == 0) {
-                fields[i].setFieldValue(value);
+            if (fields.get(i).getFieldValue() == 0) {
+                fields.get(i).setFieldValue(value);
                 return this;
             }
         }
         return this;
     }
-
 
     @Override
     public boolean equals(Object o) {

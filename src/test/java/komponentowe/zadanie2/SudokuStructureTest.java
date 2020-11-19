@@ -3,25 +3,27 @@ package komponentowe.zadanie2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuStructureTest {
 
-    SudokuField[] fields;
+    ArrayList<SudokuField> fields;
+    //SudokuField[] fields;
     SudokuStructure testRow;
     SudokuStructure testRow2;
 
     @BeforeEach
     void setup() {
-        fields = new SudokuField[9];
+        fields = new /*SudokuField[9]*/ArrayList<>(9);
         for (int i = 0; i < 9; i++) {
-            fields[i] = new SudokuField();
+            fields.set(i, new SudokuField());
         }
 
         testRow = new SudokuRow(fields);
         testRow2 = new SudokuRow(fields);
     }
-
 
     @Test
     void tryValueTest() {
@@ -30,7 +32,6 @@ class SudokuStructureTest {
         testRow.tryValue(1);
         assertFalse(testRow.verify());
     }
-
 
     @Test
     void equalsTest() {
@@ -57,6 +58,5 @@ class SudokuStructureTest {
             assertTrue(testRow.verify());
         }
         assertTrue(testRow.tryValue(4).verify());
-
     }
 }
