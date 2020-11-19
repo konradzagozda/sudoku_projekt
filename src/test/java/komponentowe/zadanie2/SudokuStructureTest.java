@@ -4,12 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuStructureTest {
 
-    ArrayList<SudokuField> fields;
+    List<SudokuField> fields = Arrays.asList(new SudokuField[9]);
     SudokuStructure testRow;
     SudokuStructure testRow2;
 

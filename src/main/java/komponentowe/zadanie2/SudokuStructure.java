@@ -1,17 +1,20 @@
 package komponentowe.zadanie2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 public abstract class SudokuStructure {
-    protected ArrayList<SudokuField> fields = new ArrayList<>();
+    protected List<SudokuField> fields = Arrays.asList(new SudokuField[9]);
 
 
-    public SudokuStructure(ArrayList<SudokuField> fields) {
-        this.fields = new ArrayList<>(9);
+    public SudokuStructure(List<SudokuField> fields) {
+        //this.fields = new /*SudokuField[9]*/ArrayList<>(9);
         for (int i = 0; i < 9; i++) {
             this.fields.set(i, new SudokuField(fields.get(i).getFieldValue()));
         }
