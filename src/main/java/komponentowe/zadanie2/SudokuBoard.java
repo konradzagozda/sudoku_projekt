@@ -108,7 +108,6 @@ public class SudokuBoard {
 
     public SudokuRow getRow(int y) {
         ArrayList<SudokuField> fields = new ArrayList<>(9);
-        //SudokuField[] fields = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
             fields.set(i, new SudokuField(board[y][i]));
         }
@@ -117,7 +116,6 @@ public class SudokuBoard {
 
     public SudokuColumn getColumn(int x) {
         ArrayList<SudokuField> column = new ArrayList<>(9);
-        //SudokuField[] column = new SudokuField[9];
         for (int y = 0; y < 9; y++) {
             column.set(y, new SudokuField(board[y][x]));
         }
@@ -126,7 +124,6 @@ public class SudokuBoard {
 
     public SudokuBox getBox(int x, int y) {
         ArrayList<SudokuField> box = new ArrayList<>(9);
-        //SudokuField[] box = new SudokuField[9];
         int squareRow = y / 3;
         int squareColumn = x / 3;
         int[] rowsToIterate = new int[3];

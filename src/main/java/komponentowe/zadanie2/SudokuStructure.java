@@ -7,12 +7,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 public abstract class SudokuStructure {
-   // protected SudokuField[] fields;
-    private ArrayList<SudokuField> fields = new ArrayList<>();
+    protected ArrayList<SudokuField> fields = new ArrayList<>();
 
 
-    public SudokuStructure(/*SudokuField[]*/ArrayList<SudokuField> fields) {
-        this.fields = new /*SudokuField[9]*/ArrayList<>(9);
+    public SudokuStructure(ArrayList<SudokuField> fields) {
+        this.fields = new ArrayList<>(9);
         for (int i = 0; i < 9; i++) {
             this.fields.set(i, new SudokuField(fields.get(i).getFieldValue()));
         }
