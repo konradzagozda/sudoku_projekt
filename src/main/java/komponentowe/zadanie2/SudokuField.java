@@ -8,15 +8,20 @@ public class SudokuField {
     private int value;
 
 
-    public SudokuField() {}
+    public SudokuField() {
+
+    }
 
     public SudokuField(int value) {
         setFieldValue(value);
     }
 
-    public SudokuField(SudokuField field) { this.value = field.getFieldValue(); }
+    public SudokuField(SudokuField field) {
+        this.value = field.getFieldValue();
+    }
 
     public int getFieldValue() {
+
         return value;
     }
 

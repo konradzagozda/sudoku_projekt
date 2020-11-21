@@ -11,13 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuStructureTest {
 
-    List<SudokuField> fields = Arrays.asList(new SudokuField[9]);
+
+    List<SudokuField> fields;
     SudokuStructure testRow;
     SudokuStructure testRow2;
 
     @BeforeEach
     void setup() {
-        fields = new ArrayList<>(9);
+        SudokuField[] array = new SudokuField[9];
+        {
+            for (int i = 0; i < 9; i++) {
+                array[i] = new SudokuField();
+            }
+        }
+        fields = Arrays.asList(array);
         for (int i = 0; i < 9; i++) {
             fields.set(i, new SudokuField());
         }
