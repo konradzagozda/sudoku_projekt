@@ -234,6 +234,16 @@ public class SudokuBoardTest {
 
         assertFalse(testBoard.equals(null));
         assertFalse(testBoard.equals(new Object()));
+
+        SudokuBoard testBoard3 = new SudokuBoard(sudokuFields2, new BacktrackingSudokuSolver());
+        SudokuBoard testBoard4 = new SudokuBoard(sudokuFields, new BacktrackingSudokuSolver());
+
+        assertTrue(testBoard3.equals(testBoard4));
+
+        testBoard4.set(0,0,2);
+
+        assertFalse(testBoard3.equals(testBoard4));
+
     }
 
     @Test

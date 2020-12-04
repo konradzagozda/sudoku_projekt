@@ -44,6 +44,7 @@ class SudokuStructureTest {
     void equalsTest() {
         assertTrue(testRow.equals(testRow));
         assertTrue(testRow.equals(testRow2));
+        assertTrue(testRow.hashCode() == testRow2.hashCode());
         assertFalse(testRow.equals(null));
     }
 
