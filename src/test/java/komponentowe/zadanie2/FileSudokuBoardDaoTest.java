@@ -52,7 +52,7 @@ class FileSudokuBoardDaoTest {
         try {
             dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao("siema.txt");
             dao.finalize();
-        } catch (FileNotFoundException e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
     }

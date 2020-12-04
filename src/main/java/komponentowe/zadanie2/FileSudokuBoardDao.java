@@ -46,7 +46,12 @@ public class FileSudokuBoardDao implements Dao, AutoCloseable {
 
     // make sure streams are closed
     @Override
-    public void finalize() throws Exception {
-        close();
+    public void finalize() throws Throwable {
+        try {
+            close();
+        } finally {
+            super.finalize();
+        }
+
     }
 }
