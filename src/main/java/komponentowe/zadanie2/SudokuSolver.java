@@ -1,5 +1,7 @@
 package komponentowe.zadanie2;
 
-public interface SudokuSolver {
+import java.io.Serializable;
+
+public interface SudokuSolver extends Serializable {
     void solve(SudokuBoard board);
 }

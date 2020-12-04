@@ -1,5 +1,6 @@
 package komponentowe.zadanie2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-public class SudokuBoard {
+public class SudokuBoard implements Serializable {
 
     private final SudokuField[][] board;
     private final ArrayList<SudokuObserver> sudokuObservers = new ArrayList<>();

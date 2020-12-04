@@ -1,8 +1,12 @@
 package komponentowe.zadanie2;
 
+import java.io.FileNotFoundException;
+
 public class SudokuBoardDaoFactory {
 
-    Dao getFileDao(String fileName) {
+    public static Dao getFileDao(String fileName) throws FileNotFoundException {
         return new FileSudokuBoardDao(fileName);
     }
+
+
 }

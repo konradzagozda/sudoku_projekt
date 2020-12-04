@@ -1,10 +1,11 @@
 package komponentowe.zadanie2;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class BacktrackingSudokuSolver implements SudokuSolver {
+public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
 
     @Override
     public void solve(SudokuBoard board) {
