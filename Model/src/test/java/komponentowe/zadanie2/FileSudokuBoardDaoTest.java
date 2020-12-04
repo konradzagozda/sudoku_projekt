@@ -2,8 +2,6 @@ package komponentowe.zadanie2;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileSudokuBoardDaoTest {
@@ -50,7 +48,7 @@ class FileSudokuBoardDaoTest {
     void testFinalize() throws Exception {
         FileSudokuBoardDao dao;
         try {
-            dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao("siema.txt");
+            dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao("sudokuBoardSerialized.ser");
             dao.finalize();
         } catch (Throwable e) {
             e.printStackTrace();

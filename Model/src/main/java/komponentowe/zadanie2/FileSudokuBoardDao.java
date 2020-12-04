@@ -17,8 +17,8 @@ public class FileSudokuBoardDao implements Dao, AutoCloseable {
 
     public FileSudokuBoardDao(String fileName) throws FileNotFoundException {
         this.fileName = fileName;
-        this.fileIn = new FileInputStream(fileName);
         this.fileOut = new FileOutputStream(fileName);
+        this.fileIn = new FileInputStream(fileName);
     }
 
 
