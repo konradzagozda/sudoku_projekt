@@ -1,0 +1,9 @@
+#sudokuGrid {
+    -fx-border-color: rgb(49, 89, 23);
+    -fx-border-width: 1px;
+}
+
+.label {
+    -fx-border-color: rgb(49, 89, 23);
+    -fx-border-width: 1px;
+}

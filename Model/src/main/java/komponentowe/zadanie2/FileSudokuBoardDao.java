@@ -9,7 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 
-public class FileSudokuBoardDao implements Dao, AutoCloseable {
+public class FileSudokuBoardDao<T> implements Dao<T> {
 
     private final String fileName;
     private final FileInputStream fileIn;
@@ -30,7 +30,7 @@ public class FileSudokuBoardDao implements Dao, AutoCloseable {
     }
 
     @Override
-    public <T> T read() throws ClassNotFoundException, IOException {
+    public T read() throws ClassNotFoundException, IOException {
         try (ObjectInputStream objOut = new ObjectInputStream(fileIn)) {
             T object = (T) objOut.readObject();
             return object;
@@ -38,20 +38,10 @@ public class FileSudokuBoardDao implements Dao, AutoCloseable {
     }
 
     @Override
-    public <T> void write(T obj) throws IOException {
+    public void write(T obj) throws IOException {
         try (ObjectOutputStream objOut = new ObjectOutputStream(fileOut)) {
             objOut.writeObject(obj);
         }
     }
 
-    // make sure streams are closed
-    @Override
-    public void finalize() throws Throwable {
-        try {
-            close();
-        } finally {
-            super.finalize();
-        }
-
-    }
 }

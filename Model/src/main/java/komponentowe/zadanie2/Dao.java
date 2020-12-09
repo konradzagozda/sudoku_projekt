@@ -2,9 +2,9 @@ package komponentowe.zadanie2;
 
 import java.io.IOException;
 
-public interface Dao {
+public interface Dao<T> extends AutoCloseable {
 
-    <T> T read() throws IOException, ClassNotFoundException;
+    T read() throws IOException, ClassNotFoundException;
 
-    <T> void write(T obj) throws IOException;
+    void write(T obj) throws IOException;
 }

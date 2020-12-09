@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="MainController">
+    <top>
+        <Label text="Select difficulty level" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+    </top>
+    <bottom>
+        <Button fx:id="playBtn" alignment="CENTER" mnemonicParsing="false" onAction="#switchSceneToGame"
+                prefHeight="30.0" prefWidth="61.0" text="play" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+    </bottom>
+    <center>
+        <VBox alignment="CENTER" prefHeight="302.0" prefWidth="600.0" spacing="30.0" BorderPane.alignment="CENTER">
+            <children>
+                <RadioButton fx:id="easyBtn" mnemonicParsing="false" onAction="#changeDifficulty" selected="true"
+                             text="Easy">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="difficultyToggle"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="mediumBtn" mnemonicParsing="false" onAction="#changeDifficulty" text="Medium"
+                             toggleGroup="$difficultyToggle">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </RadioButton>
+                <RadioButton fx:id="hardBtn" mnemonicParsing="false" onAction="#changeDifficulty" text="Hard"
+                             toggleGroup="$difficultyToggle">
+                    <font>
+                        <Font size="14.0"/>
+                    </font>
+                </RadioButton>
+            </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+        </VBox>
+    </center>
+    <opaqueInsets>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </opaqueInsets>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+</BorderPane>

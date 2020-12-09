@@ -1,13 +1,20 @@
 package komponentowe.zadanie2;
 
 import java.io.Serializable;
+import java.util.Objects;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 
-public class SudokuField implements Serializable {
+public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
     private int value;
 
+
+    // shallow copy but needed to be public for sudokuboard clone...
+    @Override
+    public SudokuField clone() throws CloneNotSupportedException {
+        return (SudokuField)super.clone();
+    }
 
     public SudokuField() {
 
@@ -61,5 +68,11 @@ public class SudokuField implements Serializable {
     @Override
     public String toString() {
         return Integer.toString(this.value);
+    }
+
+    @Override
+    public int compareTo(SudokuField o) {
+        Objects.requireNonNull(o);
+        return Integer.compare(this.value, o.value);
     }
 }

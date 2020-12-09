@@ -8,8 +8,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-public abstract class SudokuStructure {
+public abstract class SudokuStructure implements Cloneable {
     protected List<SudokuField> fields = Arrays.asList(new SudokuField[9]);
+
 
 
     public SudokuStructure(List<SudokuField> fields) {
@@ -81,4 +82,10 @@ public abstract class SudokuStructure {
                 .append("fields", fields)
                 .toString();
     }
+
+    @Override
+    public SudokuStructure clone() throws CloneNotSupportedException {
+        return (SudokuStructure)super.clone();
+    }
+
 }

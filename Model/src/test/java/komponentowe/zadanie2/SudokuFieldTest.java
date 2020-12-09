@@ -29,8 +29,8 @@ class SudokuFieldTest {
         SudokuField field = new SudokuField(5);
         SudokuField field2 = new SudokuField(6);
 
-        assertNotEquals(field, field2);
-        assertEquals(field, field);
+        assertTrue(field.compareTo(field2) < 0);
+        assertTrue(field.compareTo(field) == 0);
 
         field.setFieldValue(field2.getFieldValue());
         assertEquals(field, field2);

@@ -9,10 +9,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-public class SudokuBoard implements Serializable {
+public class SudokuBoard implements Serializable, Cloneable {
 
-    private final SudokuField[][] board;
-    private final ArrayList<SudokuObserver> sudokuObservers = new ArrayList<>();
+    private SudokuField[][] board;
+    private ArrayList<SudokuObserver> sudokuObservers = new ArrayList<>();
     SudokuSolver solver;
 
 
@@ -183,6 +183,29 @@ public class SudokuBoard implements Serializable {
         return new ToStringBuilder(this)
                 .append("board", arr.toString())
                 .toString();
+    }
+
+
+    // deep copy ( sudokuBoard fields can change so we need deep copy )
+    @Override
+    protected SudokuBoard clone() throws CloneNotSupportedException {
+        SudokuBoard copy = (SudokuBoard) super.clone();
+        copy.board = new SudokuField[9][9];
+        for (int i = 0; i < copy.board.length; i++) {
+            copy.board[i] = new SudokuField[copy.board.length];
+            for (int j = 0; j < 9; j++) {
+                copy.board[i][j] = this.board[i][j].clone();
+            }
+        }
+
+        copy.sudokuObservers = new ArrayList<>();
+        // observer wanted to observe one sudokuBoard, not many
+        // don't suprise them :)
+
+        // solver can be copied by reference, it has no fields, only behaviour
+        copy.solver = new BacktrackingSudokuSolver();
+
+        return copy;
     }
 }
 

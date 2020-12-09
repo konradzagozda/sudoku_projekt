@@ -2,17 +2,17 @@ package komponentowe.zadanie2;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class FileSudokuBoardDaoTest {
-
 
 
     @Test
     void readWriteTest() {
 
         // get DAO
-        try (FileSudokuBoardDao dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao("siema.txt")) {
+        try (FileSudokuBoardDao<SudokuBoard> dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao("siema.txt")) {
 
 
             // create SudokuBoard and Container for writing
@@ -25,33 +25,20 @@ class FileSudokuBoardDaoTest {
             SudokuBoard board = new SudokuBoard(fields, new BacktrackingSudokuSolver());
             board.solveGame();
 
-            SudokuContainer sudokuContainer = new SudokuContainer(board);
-
             // write Container with contents
-            dao.write(sudokuContainer);
+            dao.write(board);
 
             // read Container
-            SudokuContainer sudokuContainer2 = dao.read();
+            SudokuBoard board2 = dao.read();
 
             // tests
-            assertEquals(sudokuContainer, sudokuContainer2);
-            assertNotEquals(sudokuContainer, new SudokuContainer(
-                    new SudokuBoard(new SudokuField[9][9], new BacktrackingSudokuSolver())));
+            assertEquals(board, board2);
+            assertNotEquals(board,
+                    new SudokuBoard(new SudokuField[9][9], new BacktrackingSudokuSolver()));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-
-    @Test
-    void testFinalize() throws Exception {
-        FileSudokuBoardDao dao;
-        try {
-            dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao("sudokuBoardSerialized.ser");
-            dao.finalize();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
 }

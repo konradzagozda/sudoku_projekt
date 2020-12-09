@@ -10,7 +10,6 @@ public class SudokuBoardDaoFactoryTest {
 
     @Test
     void basicTest() {
-        // to make it 100% :(
         factory = new SudokuBoardDaoFactory();
         assertNotNull(factory);
     }
