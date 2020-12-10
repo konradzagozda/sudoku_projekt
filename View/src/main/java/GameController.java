@@ -8,10 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
-import komponentowe.zadanie2.BacktrackingSudokuSolver;
-import komponentowe.zadanie2.SudokuBoard;
-import komponentowe.zadanie2.SudokuField;
-import komponentowe.zadanie2.WrongSudokuStateException;
+import komponentowe.zadanie2.*;
 
 
 public class GameController implements Initializable {
@@ -44,32 +41,10 @@ public class GameController implements Initializable {
     }
 
 
-    void deleteSomeFields() {
-        int howMany = 0;
-        if (this.level == DifficultyLevel.EASY) {
-            howMany = 10;
-        } else if (this.level == DifficultyLevel.MEDIUM) {
-            howMany = 40;
-        } else if (this.level == DifficultyLevel.HARD){
-            howMany = 70;
-        }
-
-
-        Random random = new Random();
-        while (howMany > 0) {
-            int x = random.nextInt(9);
-            int y = random.nextInt(9);
-            if (board.get(x, y) != 0) {
-                board.set(x, y, 0);
-                howMany--;
-            }
-        }
-    }
-
     public void loadSudokuBoard(ActionEvent actionEvent) {
         try {
             initBoard();
-            deleteSomeFields();
+            level.deleteFields(board);
         } catch (WrongSudokuStateException e) {
             e.printStackTrace();
         }

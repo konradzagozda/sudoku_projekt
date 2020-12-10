@@ -10,6 +10,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import komponentowe.zadanie2.DifficultyLevel;
 
 
 public class MainController implements Initializable {
