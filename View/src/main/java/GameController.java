@@ -8,7 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
-import komponentowe.zadanie2.*;
+import komponentowe.zadanie2.BacktrackingSudokuSolver;
+import komponentowe.zadanie2.DifficultyLevel;
+import komponentowe.zadanie2.SudokuBoard;
+import komponentowe.zadanie2.SudokuField;
+import komponentowe.zadanie2.WrongSudokuStateException;
+
 
 
 public class GameController implements Initializable {
