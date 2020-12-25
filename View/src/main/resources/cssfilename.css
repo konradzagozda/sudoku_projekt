@@ -1,15 +1,22 @@
 #sudokuGrid {
-    -fx-border-color: rgb(49, 89, 23);
-    -fx-border-width: 1px;
-}
-
-.label {
-    -fx-border-color: rgb(49, 89, 23);
-    -fx-border-width: 1px;
-}
-
-.generatedField {
-    -fx-control-inner-background: green;
-    -fx-font-weight: bold;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
     -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+
+.borderRight {
+    -fx-border-color: black;
+    -fx-border-width: 0 3px 0 0;
+}
+
+.borderBottom {
+    -fx-border-color: black;
+    -fx-border-width: 0 0 3px 0;
+}
+
+.borderBottomRight {
+    -fx-border-color: black;
+    -fx-border-width: 0 3px 3px 0;
 }

@@ -92,6 +92,16 @@ public class GameController implements Initializable {
                 textFields[i][j].setPrefWidth(100);
                 textFields[i][j].setEditable(true);
                 sudokuGrid.add(textFields[i][j], i, j);
+                if ((i+1) % 3 == 0 && (i+1) % 9 != 0) {
+                    if ((j+1) % 3 == 0 && (j+1) % 9 != 0) {
+                        textFields[i][j].getStyleClass().add("borderBottomRight");
+                    } else {
+                        textFields[i][j].getStyleClass().add("borderRight");
+                    }
+                } else if ((j+1) % 3 == 0 && (j+1) % 9 != 0) {
+                    textFields[i][j].getStyleClass().add("borderBottom");
+                }
+
             }
         }
     }
@@ -163,5 +173,11 @@ public class GameController implements Initializable {
             System.out.println("IOException is caught");
         }
 
+    }
+
+    public void switchLanguageToPolish(ActionEvent actionEvent) {
+    }
+
+    public void switchLanguageToEnglish(ActionEvent actionEvent) {
     }
 }
