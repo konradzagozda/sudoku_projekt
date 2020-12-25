@@ -1,7 +1,3 @@
-## Uni project
-
-## Task: Make sudoku board with tests
-
 ## Tools:
 - Java
 - Maven
