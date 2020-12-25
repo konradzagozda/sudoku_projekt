@@ -26,20 +26,11 @@ public class GameController implements Initializable {
     public Button loadBtn;
     public SudokuField[][] fields;
     private LanguageSettings languageSettings;
+    private SaveObject saveObject;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fields = new SudokuField[9][9];
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                fields[i][j] = new SudokuField();
-            }
-        }
-
-        board = new SudokuBoard(fields, new BacktrackingSudokuSolver());
         createEmptySudokuBoard();
-
-        bindToCurrentFields();
     }
 
     private void bindToCurrentFields() {
@@ -67,10 +58,22 @@ public class GameController implements Initializable {
 
                         if (!newValue.matches("^\\d$") || newValue.equals("")) {
                             textField.textProperty().set("");
+                            return;
                         }
 
+
                         System.out.println("textfield changed from " + oldValue + " to " + newValue);
-                        System.out.println(board);
+                        System.out.println(saveObject);
+                        if (board.isFull()) {
+                            Alert a = new Alert(Alert.AlertType.INFORMATION);
+                            a.setContentText("Generated board is corrupted, try again!");
+                            a.show();
+                            if (board.checkBoard()) {
+                                //
+                            } else {
+                                // sorry you failed
+                            }
+                        }
                     });
 
                 } catch (NoSuchMethodException ex) {
@@ -93,13 +96,13 @@ public class GameController implements Initializable {
                 textFields[i][j].setPrefWidth(100);
                 textFields[i][j].setEditable(true);
                 sudokuGrid.add(textFields[i][j], i, j);
-                if ((i+1) % 3 == 0 && (i+1) % 9 != 0) {
-                    if ((j+1) % 3 == 0 && (j+1) % 9 != 0) {
+                if ((i + 1) % 3 == 0 && (i + 1) % 9 != 0) {
+                    if ((j + 1) % 3 == 0 && (j + 1) % 9 != 0) {
                         textFields[i][j].getStyleClass().add("borderBottomRight");
                     } else {
                         textFields[i][j].getStyleClass().add("borderRight");
                     }
-                } else if ((j+1) % 3 == 0 && (j+1) % 9 != 0) {
+                } else if ((j + 1) % 3 == 0 && (j + 1) % 9 != 0) {
                     textFields[i][j].getStyleClass().add("borderBottom");
                 }
 
@@ -114,6 +117,14 @@ public class GameController implements Initializable {
 
 
     void initBoard() throws WrongSudokuStateException {
+        fields = new SudokuField[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                fields[i][j] = new SudokuField();
+            }
+        }
+        board = new SudokuBoard(fields, new BacktrackingSudokuSolver());
+
         board.solveGame();
     }
 
@@ -122,7 +133,9 @@ public class GameController implements Initializable {
         try {
             initBoard();
             level.deleteFields(board);
-        } catch (WrongSudokuStateException e) {
+            saveObject = new SaveObject(board);
+            setTextFieldsToUneditable();
+        } catch (WrongSudokuStateException | CloneNotSupportedException e) {
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Generated board is corrupted, try again!");
             a.show();
@@ -139,9 +152,8 @@ public class GameController implements Initializable {
                 }
             }
         }
-        System.out.println(sudokuGrid.getChildren());
 
-
+        bindToCurrentFields();
     }
 
     public void loadSudokuBoardFromDisk(ActionEvent actionEvent) {
@@ -152,10 +164,12 @@ public class GameController implements Initializable {
         try (FileInputStream fis = new FileInputStream(file);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
 
-            fields = (SudokuField[][]) ois.readObject();
-            board = new SudokuBoard(fields, new BacktrackingSudokuSolver());
+            saveObject = (SaveObject) ois.readObject();
+            board = saveObject.getCurrent();
+            fields = board.getBoard();
 
             bindToCurrentFields();
+            setTextFieldsToUneditable();
         } catch (IOException | ClassNotFoundException ex) {
             System.out.println("IOException is caught");
         }
@@ -169,7 +183,7 @@ public class GameController implements Initializable {
         try (FileOutputStream fos = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
-            oos.writeObject(fields);
+            oos.writeObject(saveObject);
 
         } catch (IOException ex) {
             System.out.println("IOException is caught");
@@ -177,9 +191,24 @@ public class GameController implements Initializable {
 
     }
 
-    public void switchLanguageToPolish(ActionEvent actionEvent) {
+    void setTextFieldsToUneditable() {
+        var originalBoard = saveObject.getOriginal();
+        // clear
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                textFields[i][j].setEditable(true);
+                textFields[i][j].getStyleClass().remove("generated");
+            }
+        }
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (originalBoard.get(i, j) != 0) {
+                    textFields[i][j].setEditable(false);
+                    textFields[i][j].getStyleClass().add("generated");
+                }
+            }
+        }
     }
 
-    public void switchLanguageToEnglish(ActionEvent actionEvent) {
-    }
 }

@@ -55,7 +55,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
     }
 
-    boolean isFull() {
+    public boolean isFull() {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 if (get(row, column) == 0) {
@@ -66,7 +66,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         return true;
     }
 
-    private boolean checkBoard() {
+    public boolean checkBoard() {
         for (int i = 0; i < 9; i++) {
             if (!(getColumn(i).verify() && getRow(i).verify())) {
                 return false;
@@ -189,7 +189,7 @@ public class SudokuBoard implements Serializable, Cloneable {
 
     // deep copy ( sudokuBoard fields can change so we need deep copy )
     @Override
-    protected SudokuBoard clone() throws CloneNotSupportedException {
+    public SudokuBoard clone() throws CloneNotSupportedException {
         SudokuBoard copy = (SudokuBoard) super.clone();
         copy.board = new SudokuField[9][9];
         for (int i = 0; i < copy.board.length; i++) {
@@ -209,5 +209,8 @@ public class SudokuBoard implements Serializable, Cloneable {
         return copy;
     }
 
+    public SudokuField[][] getBoard() {
+        return board;
+    }
 }
 
