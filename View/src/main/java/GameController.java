@@ -66,19 +66,20 @@ public class GameController implements Initializable {
                         System.out.println(saveObject);
                         if (board.isFull()) {
                             Alert a = new Alert(Alert.AlertType.INFORMATION);
-                            a.setContentText("Generated board is corrupted, try again!");
-                            a.show();
                             if (board.checkBoard()) {
-                                //
+                                a.setContentText(null);
+                                a.setHeaderText(languageSettings.getGameBundle().getString("congratulations"));
                             } else {
-                                // sorry you failed
+                                a.setContentText(null);
+                                a.setHeaderText(languageSettings.getGameBundle().getString("niestety"));
                             }
+                            a.show();
                         }
                     });
 
                 } catch (NoSuchMethodException ex) {
 //                  Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("ojjj");
+                    ex.printStackTrace();
                 }
             }
         }

@@ -52,9 +52,9 @@ public class MainController implements Initializable {
     public void changeDifficulty(ActionEvent actionEvent) {
         RadioButton selectedRadioButton = (RadioButton) difficultyToggle.getSelectedToggle();
         String toggleGroupValue = selectedRadioButton.getText();
-        if (toggleGroupValue.equalsIgnoreCase("easy")) {
+        if (toggleGroupValue.equalsIgnoreCase(languageSettings.getDifficultyBundle().getString("Easy"))) {
             level = DifficultyLevel.EASY;
-        } else if (toggleGroupValue.equalsIgnoreCase("medium")) {
+        } else if (toggleGroupValue.equalsIgnoreCase(languageSettings.getDifficultyBundle().getString("Medium"))) {
             level = DifficultyLevel.MEDIUM;
         } else {
             level = DifficultyLevel.HARD;
