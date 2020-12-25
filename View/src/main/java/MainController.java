@@ -24,9 +24,9 @@ public class MainController implements Initializable {
     public RadioButton hardBtn;
     public ToggleGroup difficultyToggle;
     public DifficultyLevel level = DifficultyLevel.EASY;
-    public Locale locale = new Locale("en", "US");
     public ResourceBundle difficultyLevelsBundle = ResourceBundle.getBundle("i18n.DifficultyLevelsBundle");
-    public ResourceBundle generalBundle = ResourceBundle.getBundle("GameBundle");
+    public LanguageSettings languageSettings;
+    private Stage primaryStage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,7 +34,7 @@ public class MainController implements Initializable {
     }
 
     public Stage switchSceneToGame(ActionEvent actionEvent) throws IOException {
-        ResourceBundle bundle = ResourceBundle.getBundle("GameBundle", locale);
+        ResourceBundle bundle = languageSettings.getGameBundle();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gameView.fxml"), bundle);
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(
@@ -43,7 +43,7 @@ public class MainController implements Initializable {
 
 
         GameController controller = loader.getController();
-        controller.initData(level);
+        controller.initData(level, languageSettings);
 
         stage.show();
         return stage;
@@ -62,18 +62,41 @@ public class MainController implements Initializable {
     }
 
     public void switchLanguageToPolish(ActionEvent actionEvent) throws IOException {
-        locale = new Locale("pl", "PL");
-        difficultyLevelsBundle = ResourceBundle.getBundle("i18n.DifficultyLevelsBundle", locale);
-        easyBtn.setText(difficultyLevelsBundle.getString("Easy"));
-        mediumBtn.setText(difficultyLevelsBundle.getString("Medium"));
-        hardBtn.setText(difficultyLevelsBundle.getString("Hard"));
-        ResourceBundle bundle = ResourceBundle.getBundle("GameBundle", locale);
-        Parent root = FXMLLoader.load(getClass().getResource("/mainView.fxml"), bundle);
+        languageSettings.setLocale(new Locale("pl", "PL"));
+
+        reOpenStage();
     }
 
-    public void switchLanguageToEnglish(ActionEvent actionEvent) {
-        locale = new Locale("en", "US");
-        difficultyLevelsBundle = ResourceBundle.getBundle("i18n.DifficultyLevelsBundle", locale);
+    public void switchLanguageToEnglish(ActionEvent actionEvent) throws IOException {
+        languageSettings.setLocale(new Locale("en", "US"));
+
+        reOpenStage();
+    }
+
+    public void initData(LanguageSettings languageSettings, Stage primaryStage) {
+        this.languageSettings = languageSettings;
+        this.primaryStage = primaryStage;
+    }
+
+    public void reOpenStage() throws IOException {
+        primaryStage.close();
+
+
+        ResourceBundle bundle = languageSettings.getGameBundle();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainView.fxml"), bundle);
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setScene(
+                new Scene(loader.load())
+        );
+
+        MainController controller = loader.getController();
+        controller.initData(languageSettings, stage);
+        controller.changeDifficulties(languageSettings);
+        stage.show();
+    }
+
+    public void changeDifficulties(LanguageSettings languageSettings) {
+        difficultyLevelsBundle = languageSettings.getDifficultyBundle();
         easyBtn.setText(difficultyLevelsBundle.getString("Easy"));
         mediumBtn.setText(difficultyLevelsBundle.getString("Medium"));
         hardBtn.setText(difficultyLevelsBundle.getString("Hard"));

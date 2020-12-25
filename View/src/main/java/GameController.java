@@ -25,6 +25,7 @@ public class GameController implements Initializable {
     public SudokuBoard board;
     public Button loadBtn;
     public SudokuField[][] fields;
+    private LanguageSettings languageSettings;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -106,8 +107,9 @@ public class GameController implements Initializable {
         }
     }
 
-    void initData(DifficultyLevel level) {
+    void initData(DifficultyLevel level, LanguageSettings languageSettings) {
         this.level = level;
+        this.languageSettings = languageSettings;
     }
 
 

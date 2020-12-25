@@ -58,12 +58,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#safeCurrentSudokuBoard" text="%save" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="%language">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#switchLanguageToPolish" text="%Polish" />
-                  <MenuItem mnemonicParsing="false" onAction="#switchLanguageToEnglish" text="%English" />
-               </items>
-            </Menu>
         </menus>
       </MenuBar>
    </top>
