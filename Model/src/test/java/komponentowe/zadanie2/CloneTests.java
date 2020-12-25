@@ -23,6 +23,11 @@ public class CloneTests {
         assertNotEquals(field1.compareTo(field2), 0);
         assertTrue(field1.compareTo(field2) > 0);
         assertTrue(field2.compareTo(field1) < 0);
+
+
+        assertThrows(NullPointerException.class, () -> {
+            field1.compareTo(null);
+        });
     }
 
     @Test

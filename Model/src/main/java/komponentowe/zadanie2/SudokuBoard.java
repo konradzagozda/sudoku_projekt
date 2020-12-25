@@ -93,7 +93,7 @@ public class SudokuBoard implements Serializable, Cloneable {
 
     public void set(int x, int y, int value) throws IllegalArgumentException {
         if ((x < 9 && x >= 0) && (y < 9 && y >= 0) && (value <= 9 && value >= 0)) {
-            board[y][x] = new SudokuField(value);
+            board[y][x].setFieldValue(value);
             notifyObservers();
         } else {
             throw new IllegalArgumentException("Wrong coordinates or value");
@@ -175,14 +175,15 @@ public class SudokuBoard implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        StringBuilder arr = new StringBuilder();
-        for (SudokuField[] row : board
-        ) {
-            arr.append(Arrays.toString(row));
+        StringBuilder builder = new StringBuilder();
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                builder.append(this.get(x,y));
+                builder.append(' ');
+            }
+            builder.append('\n');
         }
-        return new ToStringBuilder(this)
-                .append("board", arr.toString())
-                .toString();
+        return builder.toString();
     }
 
 
@@ -207,5 +208,6 @@ public class SudokuBoard implements Serializable, Cloneable {
 
         return copy;
     }
+
 }
 
