@@ -2,6 +2,8 @@ package komponentowe.zadanie2;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -12,7 +14,7 @@ class FileSudokuBoardDaoTest {
     void readWriteTest() {
 
         // get DAO
-        try (FileSudokuBoardDao<SudokuBoard> dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao("siema.txt")) {
+        try (FileSudokuBoardDao<SudokuBoard> dao = (FileSudokuBoardDao) SudokuBoardDaoFactory.getFileDao(new File("siema.txt"))) {
 
 
             // create SudokuBoard and Container for writing

@@ -11,9 +11,16 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import komponentowe.zadanie2.*;
+import komponentowe.zadanie2.BacktrackingSudokuSolver;
+import komponentowe.zadanie2.DifficultyLevel;
+import komponentowe.zadanie2.FileSudokuBoardDao;
+import komponentowe.zadanie2.SudokuBoard;
+import komponentowe.zadanie2.SudokuBoardDaoFactory;
+import komponentowe.zadanie2.SudokuField;
+import komponentowe.zadanie2.WrongSudokuStateException;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -41,6 +48,14 @@ public class GameController implements Initializable {
                     return "";
                 }
                 return super.toString(value);
+            }
+
+            @Override
+            public Integer fromString(String value) {
+                if (value.isEmpty()) {
+                    return 0;
+                }
+                return super.fromString(value);
             }
         }
 
@@ -157,39 +172,28 @@ public class GameController implements Initializable {
         bindToCurrentFields();
     }
 
-    public void loadSudokuBoardFromDisk(ActionEvent actionEvent) {
+    public void loadSudokuBoardFromDisk(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         FileChooser fileChooser = new FileChooser();
-
-        File file = fileChooser.showOpenDialog(new Stage());
-
-        try (FileInputStream fis = new FileInputStream(file);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-
-            saveObject = (SaveObject) ois.readObject();
+        var file = fileChooser.showOpenDialog(new Stage());
+        try (FileSudokuBoardDao<SaveObject> dao = (FileSudokuBoardDao<SaveObject>) SudokuBoardDaoFactory.getFileDao(file)) {
+            saveObject = dao.read();
             board = saveObject.getCurrent();
             fields = board.getBoard();
-
-            bindToCurrentFields();
-            setTextFieldsToUneditable();
-        } catch (IOException | ClassNotFoundException ex) {
-            System.out.println("IOException is caught");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
+        bindToCurrentFields();
+        setTextFieldsToUneditable();
     }
 
-    public void safeCurrentSudokuBoard(ActionEvent actionEvent) {
+    public void safeCurrentSudokuBoard(ActionEvent actionEvent) throws Exception {
         FileChooser fileChooser = new FileChooser();
-
-        File file = fileChooser.showSaveDialog(new Stage());
-
-        try (FileOutputStream fos = new FileOutputStream(file);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-
-            oos.writeObject(saveObject);
-
-        } catch (IOException ex) {
-            System.out.println("IOException is caught");
+        var file = fileChooser.showSaveDialog(new Stage());
+        try(FileSudokuBoardDao<SaveObject> dao = (FileSudokuBoardDao<SaveObject>) SudokuBoardDaoFactory.getFileDao(file)) {
+            dao.write(saveObject);
         }
-
     }
 
     void setTextFieldsToUneditable() {
