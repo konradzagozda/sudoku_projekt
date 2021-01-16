@@ -21,7 +21,7 @@ public class FileSudokuBoardDao<T> implements Dao<T> {
 
     // automatically called with try with resources
     @Override
-    public void close() throws Exception {
+    public void close() {
 
     }
 

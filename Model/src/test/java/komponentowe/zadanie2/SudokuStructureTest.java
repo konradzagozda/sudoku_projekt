@@ -1,5 +1,7 @@
 package komponentowe.zadanie2;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SudokuStructureTest {
 
+    private static final Logger logger = LogManager.getLogger(SudokuStructureTest.class);
 
     List<SudokuField> fields;
     SudokuStructure testRow;
@@ -55,7 +58,7 @@ class SudokuStructureTest {
 
     @Test
     void toStringTest(){
-        System.out.println(testRow.toString());
+        logger.debug("Row: \n" + testRow.toString());
         assertTrue(testRow.toString().length() != 0);
     }
 

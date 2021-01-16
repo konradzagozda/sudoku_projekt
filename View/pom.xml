@@ -46,5 +46,14 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>../src/main/config</directory>
+            </resource>
+        </resources>
     </build>
+
+    <properties>
+        <main.basedir>${project.parent.basedir}</main.basedir>
+    </properties>
 </project>

@@ -1,5 +1,7 @@
 package komponentowe.zadanie2;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -9,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class FileSudokuBoardDaoTest {
 
+    private static final Logger logger = LogManager.getLogger(FileSudokuBoardDaoTest.class);
 
     @Test
     void readWriteTest() {
@@ -38,7 +41,7 @@ class FileSudokuBoardDaoTest {
             assertNotEquals(board,
                     new SudokuBoard(new SudokuField[9][9], new BacktrackingSudokuSolver()));
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getStackTrace());
         }
 
     }

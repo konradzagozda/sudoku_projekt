@@ -1,5 +1,7 @@
 package komponentowe.zadanie2;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CloneTests {
 
+    private static final Logger logger = LogManager.getLogger(CloneTests.class);
 
 
     @Test
@@ -53,8 +56,8 @@ public class CloneTests {
         SudokuBoard board = new SudokuBoard(fields, new BacktrackingSudokuSolver());
         SudokuBoard board2 = board.clone();
         board.solveGame();
-        System.out.println(board.toString());
-        System.out.println(board2.toString());
+        logger.debug("board1: \n" + board.toString());
+        logger.debug("board2: \n" + board2.toString());
         board2.solveGame();
         assertNotSame(board, board2);
         assertNotSame(board.getColumn(1), board2.getColumn(1));

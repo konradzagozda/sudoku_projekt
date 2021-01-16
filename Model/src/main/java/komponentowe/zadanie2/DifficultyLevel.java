@@ -1,6 +1,9 @@
 package komponentowe.zadanie2;
 
 import java.util.Random;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 public enum DifficultyLevel {
     EASY(70),
@@ -8,6 +11,7 @@ public enum DifficultyLevel {
     HARD(30);
 
     private int starterFields;
+    private static final Logger logger = LogManager.getLogger(DifficultyLevel.class);
 
     DifficultyLevel(int starterFields) {
         this.starterFields = starterFields;
@@ -25,6 +29,7 @@ public enum DifficultyLevel {
                 deleteCount--;
             }
         }
+        logger.debug("cleared " + (81 - this.starterFields) + " fields");
         return board;
     }
 }

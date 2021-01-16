@@ -2,15 +2,20 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class Main extends Application {
 
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        logger.info("Entering application.");
 
         Locale locale = Locale.getDefault();
         LanguageSettings languageSettings = new LanguageSettings(locale);
@@ -29,5 +34,6 @@ public class Main extends Application {
         mainController.initData(languageSettings, primaryStage);
 
         primaryStage.show();
+        logger.info("Window should be visible.");
     }
 }

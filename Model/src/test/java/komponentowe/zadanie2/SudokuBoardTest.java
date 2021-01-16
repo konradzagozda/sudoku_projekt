@@ -1,11 +1,15 @@
 package komponentowe.zadanie2;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SudokuBoardTest {
+
+    private static final Logger logger = LogManager.getLogger(SudokuBoardTest.class);
 
     final int[] INCORRECT_VALUES = new int[]{-10, -1, 10};
     final int[] CORRECT_VALUES = new int[]{0, 1, 2, 3, 9};
@@ -276,7 +280,7 @@ public class SudokuBoardTest {
 
     @Test
     void toStringTest() {
-        System.out.println(testBoard.toString());
+        logger.debug("testBoard: \n" + testBoard.toString());
         assertTrue(0 != testBoard.toString().length());
     }
 

@@ -15,9 +15,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import komponentowe.zadanie2.DifficultyLevel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class MainController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(MainController.class);
+
     public Button playBtn;
     public RadioButton easyBtn;
     public RadioButton mediumBtn;
@@ -54,22 +58,25 @@ public class MainController implements Initializable {
         String toggleGroupValue = selectedRadioButton.getText();
         if (toggleGroupValue.equalsIgnoreCase(languageSettings.getDifficultyBundle().getString("Easy"))) {
             level = DifficultyLevel.EASY;
+            logger.info("diffuculty changed to easy");
         } else if (toggleGroupValue.equalsIgnoreCase(languageSettings.getDifficultyBundle().getString("Medium"))) {
             level = DifficultyLevel.MEDIUM;
+            logger.info("diffuculty changed to medium");
         } else {
             level = DifficultyLevel.HARD;
+            logger.info("diffuculty changed to hard");
         }
     }
 
     public void switchLanguageToPolish(ActionEvent actionEvent) throws IOException {
         languageSettings.setLocale(new Locale("pl", "PL"));
-
+        logger.info("language set to polish");
         reOpenStage();
     }
 
     public void switchLanguageToEnglish(ActionEvent actionEvent) throws IOException {
         languageSettings.setLocale(new Locale("en", "US"));
-
+        logger.info("language set to english");
         reOpenStage();
     }
 
@@ -93,6 +100,7 @@ public class MainController implements Initializable {
         controller.initData(languageSettings, stage);
         controller.changeDifficulties(languageSettings);
         stage.show();
+        logger.trace("stage got reopened");
     }
 
     public void changeDifficulties(LanguageSettings languageSettings) {

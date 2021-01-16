@@ -1,3 +1,5 @@
+import exceptions.NoDataException;
+import exceptions.NoSuchFileException;
 import javafx.beans.property.adapter.JavaBeanIntegerProperty;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
 import javafx.event.ActionEvent;
@@ -18,6 +20,8 @@ import komponentowe.zadanie2.SudokuBoard;
 import komponentowe.zadanie2.SudokuBoardDaoFactory;
 import komponentowe.zadanie2.SudokuField;
 import komponentowe.zadanie2.WrongSudokuStateException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +30,8 @@ import java.util.ResourceBundle;
 
 
 public class GameController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(GameController.class);
+
     public GridPane sudokuGrid;
     public TextField[][] textFields;
     public DifficultyLevel level;
@@ -37,6 +43,7 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        logger.info("game view initialized");
         createEmptySudokuBoard();
     }
 
@@ -73,19 +80,21 @@ public class GameController implements Initializable {
 
                         if (!newValue.matches("^\\d$") || newValue.equals("")) {
                             textField.textProperty().set("");
+                            logger.debug("textfield didn't change - wrong value was inserted:" + newValue);
                             return;
                         }
 
-
-                        System.out.println("textfield changed from " + oldValue + " to " + newValue);
-                        System.out.println(saveObject);
+                        logger.debug("textfield changed from " + oldValue + " to " + newValue);
+                        logger.debug("current state of saveObject: \n" + saveObject);
                         if (board.isFull()) {
                             Alert a = new Alert(Alert.AlertType.INFORMATION);
                             if (board.checkBoard()) {
                                 a.setContentText(null);
+                                logger.info("User solved sudoku correctly!");
                                 a.setHeaderText(languageSettings.getGameBundle().getString("congratulations"));
                             } else {
                                 a.setContentText(null);
+                                logger.info("User solved sudoku incorrectly!");
                                 a.setHeaderText(languageSettings.getGameBundle().getString("niestety"));
                             }
                             a.show();
@@ -93,8 +102,7 @@ public class GameController implements Initializable {
                     });
 
                 } catch (NoSuchMethodException ex) {
-//                  Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-                    ex.printStackTrace();
+                    logger.error(ex.getStackTrace());
                 }
             }
         }
@@ -123,7 +131,9 @@ public class GameController implements Initializable {
                 }
 
             }
+
         }
+        logger.debug("9x9 textFields generated");
     }
 
     void initData(DifficultyLevel level, LanguageSettings languageSettings) {
@@ -142,6 +152,8 @@ public class GameController implements Initializable {
         board = new SudokuBoard(fields, new BacktrackingSudokuSolver());
 
         board.solveGame();
+
+        logger.debug("new board got generated!");
     }
 
 
@@ -150,14 +162,17 @@ public class GameController implements Initializable {
             initBoard();
             level.deleteFields(board);
             saveObject = new SaveObject(board);
+            logger.debug("saveObject created");
             setTextFieldsToUneditable();
         } catch (WrongSudokuStateException | CloneNotSupportedException e) {
+            logger.error("Generated board is corrupted, try again!");
+            logger.error(e.getStackTrace());
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setContentText("Generated board is corrupted, try again!");
             a.show();
-            e.printStackTrace();
         }
-
+        logger.trace("Generated board is ok!");
+        logger.debug("\n" + board.toString());
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -172,15 +187,22 @@ public class GameController implements Initializable {
         bindToCurrentFields();
     }
 
-    public void loadSudokuBoardFromDisk(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
+    public void loadSudokuBoardFromDisk(ActionEvent actionEvent) throws IOException, ClassNotFoundException, NoSuchFieldException, NoSuchFileException, NoDataException {
         FileChooser fileChooser = new FileChooser();
         var file = fileChooser.showOpenDialog(new Stage());
         try (FileSudokuBoardDao<SaveObject> dao = (FileSudokuBoardDao<SaveObject>) SudokuBoardDaoFactory.getFileDao(file)) {
             saveObject = dao.read();
             board = saveObject.getCurrent();
             fields = board.getBoard();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException ioe) {
+            logger.error(ioe.getStackTrace());
+            if (!file.exists()){
+                logger.error("no such file");
+                throw new NoSuchFileException("No file with specified name: " + file.getName());
+            } else if (file.length() == 0) {
+                logger.error("no data in a file");
+                throw new NoDataException();
+            }
         }
 
 

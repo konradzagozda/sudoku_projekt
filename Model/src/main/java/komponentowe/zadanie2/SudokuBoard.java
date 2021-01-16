@@ -7,9 +7,13 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class SudokuBoard implements Serializable, Cloneable {
+
+    private static final Logger logger = LogManager.getLogger(SudokuBoard.class);
 
     private SudokuField[][] board;
     private ArrayList<SudokuObserver> sudokuObservers = new ArrayList<>();
@@ -59,16 +63,19 @@ public class SudokuBoard implements Serializable, Cloneable {
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 if (get(row, column) == 0) {
+                    logger.debug("board is not full");
                     return false;
                 }
             }
         }
+        logger.debug("board is full");
         return true;
     }
 
     public boolean checkBoard() {
         for (int i = 0; i < 9; i++) {
             if (!(getColumn(i).verify() && getRow(i).verify())) {
+                logger.debug("board is not correctly filled");
                 return false;
             }
         }
@@ -80,7 +87,7 @@ public class SudokuBoard implements Serializable, Cloneable {
                 }
             }
         }
-
+        logger.debug("board is correctly filled");
         return true;
     }
 
@@ -128,7 +135,6 @@ public class SudokuBoard implements Serializable, Cloneable {
 
     public SudokuBox getBox(int x, int y) {
         List<SudokuField> box = Arrays.asList(new SudokuField[9]);
-        //ArrayList<SudokuField> box = new ArrayList<>(9);
         int squareRow = y / 3;
         int squareColumn = x / 3;
         int[] rowsToIterate = new int[3];
