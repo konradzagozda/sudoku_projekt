@@ -17,6 +17,7 @@ public class LanguageSettings {
 
     public void setLocale(Locale locale) {
         this.locale = locale;
+        Locale.setDefault(this.locale);
 
         difficultyBundle = ResourceBundle.getBundle("i18n.DifficultyLevelsBundle", locale);
         messagesBundle = ResourceBundle.getBundle("MessagesBundle", locale);

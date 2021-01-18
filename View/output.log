@@ -2314,3 +2314,180 @@ current:
 11:17:40.543 [JavaFX Application Thread] INFO  MainController - diffuculty changed to medium
 11:17:41.251 [JavaFX Application Thread] INFO  GameController - "game view initialized"
 11:17:41.278 [JavaFX Application Thread] DEBUG GameController - "9x9 textFields generated"
+11:24:22.401 [JavaFX Application Thread] INFO  Main - Entering application.
+11:24:23.229 [JavaFX Application Thread] INFO  Main - Window should be visible.
+11:24:37.581 [JavaFX Application Thread] INFO  GameController - "game view initialized"
+11:24:37.609 [JavaFX Application Thread] DEBUG GameController - "9x9 textFields generated"
+11:24:40.328 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.329 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.329 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.329 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.330 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.330 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.330 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.331 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.331 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.331 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.332 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.332 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.332 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.332 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.333 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.333 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.334 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.334 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.334 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.335 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.335 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.335 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.336 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.336 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.336 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.337 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.337 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.338 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.338 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.339 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.340 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.340 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.341 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.341 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.342 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.342 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.342 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.343 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.343 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.344 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.344 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.344 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.344 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.345 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.345 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.345 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.346 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.346 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.346 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.346 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.347 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.347 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.347 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.347 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.348 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.348 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.348 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.348 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.348 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.349 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.349 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.349 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.349 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.350 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.350 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.350 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.350 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.350 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.351 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.351 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.351 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.351 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.351 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.352 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.352 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.352 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.352 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.353 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.353 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.353 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.353 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.353 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.354 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.354 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.354 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.355 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.355 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.355 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.355 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.356 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.356 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.356 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.356 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.357 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.357 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.357 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.357 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.358 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.358 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.358 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.359 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.359 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.359 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.359 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.360 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.360 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.360 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.360 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.361 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.361 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.361 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.361 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.361 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.362 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.362 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.362 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.362 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.363 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.363 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.363 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.363 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.364 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.364 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.364 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.365 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.365 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.365 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.366 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.366 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.366 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.366 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.366 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.367 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.367 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.367 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.367 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.367 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.368 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.368 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.368 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.368 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.368 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.369 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.369 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.369 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.369 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.369 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.369 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.370 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.370 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.370 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.370 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.370 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.371 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.371 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.371 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
+11:24:40.371 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is full
+11:24:40.372 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is correctly filled
+11:24:40.372 [JavaFX Application Thread] DEBUG GameController - "new board got generated!"
+11:24:40.373 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.DifficultyLevel - cleared 11 fields
+11:24:40.373 [JavaFX Application Thread] DEBUG GameController - "saveObject created"
+11:24:40.417 [JavaFX Application Thread] TRACE GameController - "Generated board is ok!"
+11:24:40.417 [JavaFX Application Thread] DEBUG GameController - 
+9 0 4 1 2 8 5 7 0 
+0 2 5 4 0 7 9 3 8 
+6 7 8 3 5 9 4 2 1 
+5 9 3 6 4 1 2 8 7 
+4 6 7 9 8 2 1 5 3 
+0 8 1 0 3 5 6 4 9 
+0 5 0 2 7 6 8 1 4 
+7 1 2 8 0 4 0 6 5 
+8 4 0 5 1 3 7 9 2 
+
