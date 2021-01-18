@@ -11,4 +11,9 @@ public class NoSuchFileException extends RendererAplicationException {
     public NoSuchFileException(String s) {
         super(s);
     }
+
+    @Override
+    public String getLocalizedMessage() {
+        return localisedMessages.getString("noFile");
+    }
 }

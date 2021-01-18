@@ -1,3 +1,4 @@
+import exceptions.LocalisedNoSuchMethodException;
 import exceptions.NoDataException;
 import exceptions.NoSuchFileException;
 import javafx.beans.property.adapter.JavaBeanIntegerProperty;
@@ -26,6 +27,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 
@@ -40,10 +42,14 @@ public class GameController implements Initializable {
     public SudokuField[][] fields;
     private LanguageSettings languageSettings;
     private SaveObject saveObject;
+    private ResourceBundle localisedMessages;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logger.info("game view initialized");
+        localisedMessages = ResourceBundle.getBundle("MessagesBundle", Locale.getDefault());
+
+
+        logger.info(localisedMessages.getString("initialization"));
         createEmptySudokuBoard();
     }
 
@@ -80,21 +86,21 @@ public class GameController implements Initializable {
 
                         if (!newValue.matches("^\\d$") || newValue.equals("")) {
                             textField.textProperty().set("");
-                            logger.debug("textfield didn't change - wrong value was inserted:" + newValue);
+                            logger.debug(localisedMessages.getString("txtFldNoChange") + " " + newValue);
                             return;
                         }
 
-                        logger.debug("textfield changed from " + oldValue + " to " + newValue);
-                        logger.debug("current state of saveObject: \n" + saveObject);
+                        logger.debug(localisedMessages.getString("txtFldChange") + oldValue + " to " + newValue);
+                        logger.debug(localisedMessages.getString("saveObjectState") + saveObject);
                         if (board.isFull()) {
                             Alert a = new Alert(Alert.AlertType.INFORMATION);
                             if (board.checkBoard()) {
                                 a.setContentText(null);
-                                logger.info("User solved sudoku correctly!");
+                                logger.info(localisedMessages.getString("solvedOK"));
                                 a.setHeaderText(languageSettings.getGameBundle().getString("congratulations"));
                             } else {
                                 a.setContentText(null);
-                                logger.info("User solved sudoku incorrectly!");
+                                logger.info(localisedMessages.getString("solvedBAD"));
                                 a.setHeaderText(languageSettings.getGameBundle().getString("niestety"));
                             }
                             a.show();
@@ -102,7 +108,8 @@ public class GameController implements Initializable {
                     });
 
                 } catch (NoSuchMethodException ex) {
-                    logger.error(ex.getStackTrace());
+                    LocalisedNoSuchMethodException e = (LocalisedNoSuchMethodException) ex;
+                    logger.error(e.getLocalizedMessage());
                 }
             }
         }
@@ -133,12 +140,13 @@ public class GameController implements Initializable {
             }
 
         }
-        logger.debug("9x9 textFields generated");
+        logger.debug(localisedMessages.getString("textFieldsGenerated"));
     }
 
     void initData(DifficultyLevel level, LanguageSettings languageSettings) {
         this.level = level;
         this.languageSettings = languageSettings;
+        this.localisedMessages = languageSettings.getMessagesBundle();
     }
 
 
@@ -153,7 +161,7 @@ public class GameController implements Initializable {
 
         board.solveGame();
 
-        logger.debug("new board got generated!");
+        logger.debug(localisedMessages.getString("newBoardGenerated"));
     }
 
 
@@ -162,16 +170,16 @@ public class GameController implements Initializable {
             initBoard();
             level.deleteFields(board);
             saveObject = new SaveObject(board);
-            logger.debug("saveObject created");
+            logger.debug(localisedMessages.getString("saveObjCreated"));
             setTextFieldsToUneditable();
         } catch (WrongSudokuStateException | CloneNotSupportedException e) {
-            logger.error("Generated board is corrupted, try again!");
+            logger.error(e.getLocalizedMessage());
             logger.error(e.getStackTrace());
             Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setContentText("Generated board is corrupted, try again!");
+            a.setContentText(localisedMessages.getString("corruptedBoard"));
             a.show();
         }
-        logger.trace("Generated board is ok!");
+        logger.trace(localisedMessages.getString("boardOK"));
         logger.debug("\n" + board.toString());
 
         for (int i = 0; i < 9; i++) {
@@ -197,11 +205,14 @@ public class GameController implements Initializable {
         } catch (IOException ioe) {
             logger.error(ioe.getStackTrace());
             if (!file.exists()){
-                logger.error("no such file");
-                throw new NoSuchFileException("No file with specified name: " + file.getName());
+                var nsfe = new NoSuchFileException(localisedMessages.getString("noFileWithName") + file.getName());
+                logger.error(nsfe.getLocalizedMessage());
+                throw nsfe;
             } else if (file.length() == 0) {
-                logger.error("no data in a file");
-                throw new NoDataException();
+                logger.error(localisedMessages.getString("noDataInFile"));
+                var nde = new NoDataException();
+                logger.error(nde.getLocalizedMessage());
+                throw nde;
             }
         }
 
