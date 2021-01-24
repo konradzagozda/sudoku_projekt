@@ -1,8 +1,11 @@
 package komponentowe.zadanie2;
 
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class SudokuSQLException extends SQLException {
+    ResourceBundle localisedMessages = ResourceBundle.getBundle("exceptionBundle");
+
     public SudokuSQLException() {
         super();
     }
@@ -13,6 +16,6 @@ public class SudokuSQLException extends SQLException {
 
     @Override
     public String getLocalizedMessage() {
-        return "SQLException occurred";
+        return localisedMessages.getString("SQLException");
     }
 }
