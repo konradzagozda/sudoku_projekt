@@ -1,31 +1,28 @@
 import exceptions.LocalisedNoSuchMethodException;
-import exceptions.NoDataException;
-import exceptions.NoSuchFileException;
 import javafx.beans.property.adapter.JavaBeanIntegerProperty;
 import javafx.beans.property.adapter.JavaBeanIntegerPropertyBuilder;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import komponentowe.zadanie2.BacktrackingSudokuSolver;
 import komponentowe.zadanie2.DifficultyLevel;
-import komponentowe.zadanie2.FileSudokuBoardDao;
+import komponentowe.zadanie2.SaveObject;
 import komponentowe.zadanie2.SudokuBoard;
-import komponentowe.zadanie2.SudokuBoardDaoFactory;
 import komponentowe.zadanie2.SudokuField;
 import komponentowe.zadanie2.WrongSudokuStateException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -38,7 +35,6 @@ public class GameController implements Initializable {
     public TextField[][] textFields;
     public DifficultyLevel level;
     public SudokuBoard board;
-    public Button loadBtn;
     public SudokuField[][] fields;
     private LanguageSettings languageSettings;
     private SaveObject saveObject;
@@ -61,14 +57,6 @@ public class GameController implements Initializable {
                     return "";
                 }
                 return super.toString(value);
-            }
-
-            @Override
-            public Integer fromString(String value) {
-                if (value.isEmpty()) {
-                    return 0;
-                }
-                return super.fromString(value);
             }
         }
 
@@ -195,38 +183,32 @@ public class GameController implements Initializable {
         bindToCurrentFields();
     }
 
-    public void loadSudokuBoardFromDisk(ActionEvent actionEvent) throws IOException, ClassNotFoundException, NoSuchFieldException, NoSuchFileException, NoDataException {
-        FileChooser fileChooser = new FileChooser();
-        var file = fileChooser.showOpenDialog(new Stage());
-        try (FileSudokuBoardDao<SaveObject> dao = (FileSudokuBoardDao<SaveObject>) SudokuBoardDaoFactory.getFileDao(file)) {
-            saveObject = dao.read();
-            board = saveObject.getCurrent();
-            fields = board.getBoard();
-        } catch (IOException ioe) {
-            logger.error(ioe.getStackTrace());
-            if (!file.exists()){
-                var nsfe = new NoSuchFileException(localisedMessages.getString("noFileWithName") + file.getName());
-                logger.error(nsfe.getLocalizedMessage());
-                throw nsfe;
-            } else if (file.length() == 0) {
-                logger.error(localisedMessages.getString("noDataInFile"));
-                var nde = new NoDataException();
-                logger.error(nde.getLocalizedMessage());
-                throw nde;
-            }
-        }
+    public void loadSudokuBoardFromDisk(ActionEvent actionEvent) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("loadView.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setScene(
+                new Scene(loader.load())
+        );
 
+        LoadViewController controller = loader.getController();
+        controller.initData(this);
 
-        bindToCurrentFields();
-        setTextFieldsToUneditable();
+        stage.show();
     }
 
-    public void safeCurrentSudokuBoard(ActionEvent actionEvent) throws Exception {
-        FileChooser fileChooser = new FileChooser();
-        var file = fileChooser.showSaveDialog(new Stage());
-        try(FileSudokuBoardDao<SaveObject> dao = (FileSudokuBoardDao<SaveObject>) SudokuBoardDaoFactory.getFileDao(file)) {
-            dao.write(saveObject);
-        }
+    public void saveCurrentSudokuBoard(ActionEvent actionEvent) throws Exception {
+        // show save window
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("saveView.fxml"));
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setScene(
+                new Scene(loader.load())
+        );
+
+
+        SaveViewController controller = loader.getController();
+        controller.initData(saveObject);
+
+        stage.show();
     }
 
     void setTextFieldsToUneditable() {
@@ -247,6 +229,14 @@ public class GameController implements Initializable {
                 }
             }
         }
+    }
+
+    public void replaceSaveObject(SaveObject saveObject) {
+        this.saveObject = saveObject;
+        board = saveObject.getCurrent();
+        fields = board.getBoard();
+        bindToCurrentFields();
+        setTextFieldsToUneditable();
     }
 
 }

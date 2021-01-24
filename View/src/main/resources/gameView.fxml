@@ -55,7 +55,7 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#loadSudokuBoard" text="%initNew" />
                   <MenuItem mnemonicParsing="false" onAction="#loadSudokuBoardFromDisk" text="%load" />
-                  <MenuItem mnemonicParsing="false" onAction="#safeCurrentSudokuBoard" text="%save" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveCurrentSudokuBoard" text="%save" />
             </items>
           </Menu>
         </menus>

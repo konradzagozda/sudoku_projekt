@@ -17,7 +17,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
     }
 
     public SudokuField() {
-
+        this(0);
     }
 
     public SudokuField(int value) {
