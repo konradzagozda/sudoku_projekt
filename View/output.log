@@ -1018,3 +1018,5 @@ current:
 21:01:03.232 [JavaFX Application Thread] DEBUG komponentowe.zadanie2.SudokuBoard - board is not full
 21:01:11.962 [JavaFX Application Thread] INFO  GameController - "game view initialized"
 21:01:11.975 [JavaFX Application Thread] DEBUG GameController - "9x9 textFields generated"
+23:18:53.413 [JavaFX Application Thread] INFO  Main - Entering application.
+23:18:54.304 [JavaFX Application Thread] INFO  Main - Window should be visible.

@@ -115,7 +115,7 @@ public class JdbcSudokuBoardDao implements Dao<SaveObject> {
             int affectedRowsInFields = createFieldsStatement.executeUpdate();
             if (affectedRowsInFields == 0) {
                 cnct.rollback();
-                throw new SudokuSQLException("Creating row with fields failed");
+                throw new NoRowsAffectedException("Creating row with fields failed");
             }
 
             try (ResultSet generatedKeysFields = createFieldsStatement.getGeneratedKeys()) {
@@ -129,7 +129,7 @@ public class JdbcSudokuBoardDao implements Dao<SaveObject> {
                     int affectedRowsInOriginalFields = createOriginalFieldsStatement.executeUpdate();
                     if (affectedRowsInOriginalFields == 0) {
                         cnct.rollback();
-                        throw new SudokuSQLException("Creating row with fields failed");
+                        throw new NoRowsAffectedException("Creating row with fields failed");
                     }
 
                     try (ResultSet generatedKeys = createOriginalFieldsStatement.getGeneratedKeys()) {
@@ -147,7 +147,7 @@ public class JdbcSudokuBoardDao implements Dao<SaveObject> {
 
                         } else {
                             cnct.rollback();
-                            throw new SQLException("Creating fields failed, no ID obtained.");
+                            throw new NoKeyGeneratedException("Creating fields failed, no ID obtained.");
                         }
                     }
 
